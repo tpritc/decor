@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  default_url_options(host: Decor::Routes.host, protocol: Decor::Routes.protocol)
+
   root "home#index"
 
   resources :computers, only: :index

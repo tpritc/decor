@@ -16,7 +16,9 @@
       "Bash(curl:*)",
       "Bash(chmod:*)",
       "Bash(cat:*)",
-      "Bash(RAILS_ENV=test bin/rails db:test:prepare:*)"
+      "Bash(RAILS_ENV=test bin/rails db:test:prepare:*)",
+      "Bash(ls:*)",
+      "Bash(mkdir:*)"
     ]
   }
 }

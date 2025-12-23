@@ -1,4 +1,5 @@
 require_relative "boot"
+require_relative "../app/models/decor/routes"
 
 require "rails/all"
 
@@ -23,5 +24,11 @@ module Decor
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    config.action_mailer.default_url_options = {
+      host: Decor::Routes.host,
+      protocol: Decor::Routes.protocol
+    }
+    config.action_mailer.asset_host = Decor::Routes.host_with_protocol
   end
 end

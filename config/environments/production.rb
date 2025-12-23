@@ -61,9 +61,6 @@ Rails.application.configure do
     api_token: ENV["POSTMARK_API_TOKEN"] || Rails.application.credentials.dig(:postmark, :api_token)
   }
 
-  # Set host to be used by links generated in mailer templates.
-  config.action_mailer.default_url_options = { host: ENV.fetch("APP_HOST", "example.com") }
-
   # Specify outgoing SMTP server. Remember to add smtp/* credentials via bin/rails credentials:edit.
   # config.action_mailer.smtp_settings = {
   #   user_name: Rails.application.credentials.dig(:smtp, :user_name),
