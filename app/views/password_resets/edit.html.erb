@@ -1,10 +1,10 @@
 <div class="max-w-md mx-auto">
-  <h1 class="text-2xl font-bold mb-6">Reset Password</h1>
+  <h1 class="text-xl font-semibold mb-4">Reset Password</h1>
 
   <%= form_with model: @owner, url: password_reset_path(params[:token]), method: :patch, class: "space-y-4" do |f| %>
     <% if @owner.errors.any? %>
-      <div class="bg-red-50 border border-red-200 rounded-md p-4">
-        <ul class="list-disc list-inside text-red-700">
+      <div class="bg-white border border-stone-200 rounded p-3">
+        <ul class="list-disc list-inside text-sm text-stone-700">
           <% @owner.errors.full_messages.each do |message| %>
             <li><%= message %></li>
           <% end %>
@@ -13,17 +13,17 @@
     <% end %>
 
     <div>
-      <%= f.label :password, "New Password", class: "block text-sm font-medium text-gray-700" %>
+      <%= f.label :password, "New Password", class: "block text-sm font-medium text-stone-700" %>
       <%= f.password_field :password, required: true, autofocus: true, class: field_classes %>
     </div>
 
     <div>
-      <%= f.label :password_confirmation, "Confirm Password", class: "block text-sm font-medium text-gray-700" %>
+      <%= f.label :password_confirmation, "Confirm Password", class: "block text-sm font-medium text-stone-700" %>
       <%= f.password_field :password_confirmation, required: true, class: field_classes %>
     </div>
 
     <div>
-      <%= f.submit "Reset Password", class: "bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-md cursor-pointer" %>
+      <%= f.submit "Reset Password", class: "bg-stone-900 hover:bg-stone-800 text-white text-sm font-medium py-2 px-4 rounded cursor-pointer" %>
     </div>
   <% end %>
 </div>

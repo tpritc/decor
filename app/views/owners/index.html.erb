@@ -1,29 +1,29 @@
-<div class="max-w-6xl mx-auto">
-  <h1 class="text-2xl font-bold mb-6">All Owners</h1>
+<div class="max-w-5xl mx-auto">
+  <h1 class="text-xl font-semibold mb-4">All Owners</h1>
 
   <% if @owners.any? %>
-    <div class="bg-white shadow overflow-hidden rounded-lg">
-      <table class="min-w-full divide-y divide-gray-200">
-        <thead class="bg-gray-50">
+    <div class="bg-white border border-stone-200 rounded">
+      <table class="min-w-full divide-y divide-stone-200">
+        <thead class="bg-stone-50">
           <tr>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Username</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Country</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Computers</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Components</th>
-            <th class="px-6 py-3"></th>
+            <th class="px-4 py-2 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">Username</th>
+            <th class="px-4 py-2 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">Country</th>
+            <th class="px-4 py-2 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">Computers</th>
+            <th class="px-4 py-2 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">Components</th>
+            <th class="px-4 py-2"></th>
           </tr>
         </thead>
-        <tbody class="bg-white divide-y divide-gray-200">
+        <tbody class="bg-white divide-y divide-stone-200 text-sm">
           <% @owners.each do |owner| %>
             <tr>
-              <td class="px-6 py-4 whitespace-nowrap font-medium"><%= owner.user_name %></td>
-              <td class="px-6 py-4 whitespace-nowrap text-gray-500">
+              <td class="px-4 py-3 whitespace-nowrap font-medium text-stone-900"><%= owner.user_name %></td>
+              <td class="px-4 py-3 whitespace-nowrap text-stone-600">
                 <%= visible_field(owner, :country) { owner.country_name } %>
               </td>
-              <td class="px-6 py-4 whitespace-nowrap text-gray-500"><%= owner.computers.count %></td>
-              <td class="px-6 py-4 whitespace-nowrap text-gray-500"><%= owner.components.count %></td>
-              <td class="px-6 py-4 whitespace-nowrap text-right">
-                <%= link_to "View", owner, class: "text-indigo-600 hover:text-indigo-900" %>
+              <td class="px-4 py-3 whitespace-nowrap text-stone-600"><%= owner.computers.count %></td>
+              <td class="px-4 py-3 whitespace-nowrap text-stone-600"><%= owner.components.count %></td>
+              <td class="px-4 py-3 whitespace-nowrap text-right">
+                <%= link_to "View", owner, class: "text-stone-700 hover:text-stone-900" %>
               </td>
             </tr>
           <% end %>
@@ -31,6 +31,6 @@
       </table>
     </div>
   <% else %>
-    <p class="text-gray-500">No owners registered yet.</p>
+    <p class="text-sm text-stone-500">No owners registered yet.</p>
   <% end %>
 </div>

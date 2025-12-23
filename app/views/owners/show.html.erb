@@ -1,68 +1,68 @@
-<div class="max-w-6xl mx-auto">
-  <div class="flex justify-between items-start mb-6">
+<div class="max-w-5xl mx-auto">
+  <div class="flex justify-between items-start mb-4">
     <div>
-      <h1 class="text-2xl font-bold"><%= @owner.user_name %></h1>
+      <h1 class="text-xl font-semibold"><%= @owner.user_name %></h1>
       <% if (real_name = visible_field(@owner, :real_name)).present? %>
-        <p class="text-gray-600"><%= real_name %></p>
+        <p class="text-sm text-stone-600"><%= real_name %></p>
       <% end %>
     </div>
     <% if current_owner == @owner || admin? %>
-      <%= link_to "Edit Profile", edit_owner_path(@owner), class: "bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-md" %>
+      <%= link_to "Edit Profile", edit_owner_path(@owner), class: "bg-stone-900 hover:bg-stone-800 text-white text-sm font-medium py-2 px-4 rounded" %>
     <% end %>
   </div>
 
-  <div class="bg-white shadow rounded-lg p-6 mb-8">
-    <dl class="grid grid-cols-2 gap-4">
+  <div class="bg-white border border-stone-200 rounded p-4 mb-6">
+    <dl class="grid grid-cols-2 gap-3 text-sm">
       <% if (country = visible_field(@owner, :country) { @owner.country_name }).present? %>
         <div>
-          <dt class="text-sm font-medium text-gray-500">Country</dt>
+          <dt class="text-xs font-medium text-stone-500 uppercase tracking-wider">Country</dt>
           <dd class="mt-1"><%= country %></dd>
         </div>
       <% end %>
       <% if (email = visible_field(@owner, :email)).present? %>
         <div>
-          <dt class="text-sm font-medium text-gray-500">Email</dt>
+          <dt class="text-xs font-medium text-stone-500 uppercase tracking-wider">Email</dt>
           <dd class="mt-1"><%= mail_to email %></dd>
         </div>
       <% end %>
       <% if @owner.website.present? %>
         <div>
-          <dt class="text-sm font-medium text-gray-500">Website</dt>
-          <dd class="mt-1"><%= link_to @owner.website, @owner.website, target: "_blank", class: "text-indigo-600 hover:text-indigo-900" %></dd>
+          <dt class="text-xs font-medium text-stone-500 uppercase tracking-wider">Website</dt>
+          <dd class="mt-1"><%= link_to @owner.website, @owner.website, target: "_blank", class: "text-stone-700 hover:text-stone-900" %></dd>
         </div>
       <% end %>
     </dl>
   </div>
 
-  <div class="mb-8">
-    <div class="flex justify-between items-center mb-4">
-      <h2 class="text-xl font-bold">Computers (<%= @computers.count %>)</h2>
+  <div class="mb-6">
+    <div class="flex justify-between items-center mb-3">
+      <h2 class="text-lg font-semibold">Computers (<%= @computers.count %>)</h2>
       <% if current_owner == @owner || admin? %>
-        <%= link_to "Add Computer", new_owner_computer_path(@owner), class: "bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-md text-sm" %>
+        <%= link_to "Add Computer", new_owner_computer_path(@owner), class: "bg-stone-900 hover:bg-stone-800 text-white text-sm font-medium py-2 px-3 rounded" %>
       <% end %>
     </div>
 
     <% if @computers.any? %>
-      <div class="bg-white shadow overflow-hidden rounded-lg">
-        <table class="min-w-full divide-y divide-gray-200">
-          <thead class="bg-gray-50">
+      <div class="bg-white border border-stone-200 rounded">
+        <table class="min-w-full divide-y divide-stone-200">
+          <thead class="bg-stone-50">
             <tr>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Model</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Serial</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Condition</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
-              <th class="px-6 py-3"></th>
+              <th class="px-4 py-2 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">Model</th>
+              <th class="px-4 py-2 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">Serial</th>
+              <th class="px-4 py-2 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">Condition</th>
+              <th class="px-4 py-2 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">Status</th>
+              <th class="px-4 py-2"></th>
             </tr>
           </thead>
-          <tbody class="bg-white divide-y divide-gray-200">
+          <tbody class="bg-white divide-y divide-stone-200 text-sm">
             <% @computers.each do |computer| %>
               <tr>
-                <td class="px-6 py-4 whitespace-nowrap font-medium"><%= computer.computer_model.name %></td>
-                <td class="px-6 py-4 whitespace-nowrap text-gray-500"><%= computer.serial_number.presence || "—" %></td>
-                <td class="px-6 py-4 whitespace-nowrap text-gray-500"><%= computer.condition_label %></td>
-                <td class="px-6 py-4 whitespace-nowrap text-gray-500"><%= computer.run_status_label %></td>
-                <td class="px-6 py-4 whitespace-nowrap text-right">
-                  <%= link_to "View", owner_computer_path(@owner, computer), class: "text-indigo-600 hover:text-indigo-900" %>
+                <td class="px-4 py-3 whitespace-nowrap font-medium text-stone-900"><%= computer.computer_model.name %></td>
+                <td class="px-4 py-3 whitespace-nowrap text-stone-600"><%= computer.serial_number.presence || "—" %></td>
+                <td class="px-4 py-3 whitespace-nowrap text-stone-600"><%= computer.condition_label %></td>
+                <td class="px-4 py-3 whitespace-nowrap text-stone-600"><%= computer.run_status_label %></td>
+                <td class="px-4 py-3 whitespace-nowrap text-right">
+                  <%= link_to "View", owner_computer_path(@owner, computer), class: "text-stone-700 hover:text-stone-900" %>
                 </td>
               </tr>
             <% end %>
@@ -70,43 +70,43 @@
         </table>
       </div>
     <% else %>
-      <p class="text-gray-500">No computers registered.</p>
+      <p class="text-sm text-stone-500">No computers registered.</p>
     <% end %>
   </div>
 
   <div>
-    <div class="flex justify-between items-center mb-4">
-      <h2 class="text-xl font-bold">Components (<%= @components.count %>)</h2>
+    <div class="flex justify-between items-center mb-3">
+      <h2 class="text-lg font-semibold">Components (<%= @components.count %>)</h2>
       <% if current_owner == @owner || admin? %>
-        <%= link_to "Add Component", new_owner_component_path(@owner), class: "bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-md text-sm" %>
+        <%= link_to "Add Component", new_owner_component_path(@owner), class: "bg-stone-900 hover:bg-stone-800 text-white text-sm font-medium py-2 px-3 rounded" %>
       <% end %>
     </div>
 
     <% if @components.any? %>
-      <div class="bg-white shadow overflow-hidden rounded-lg">
-        <table class="min-w-full divide-y divide-gray-200">
-          <thead class="bg-gray-50">
+      <div class="bg-white border border-stone-200 rounded">
+        <table class="min-w-full divide-y divide-stone-200">
+          <thead class="bg-stone-50">
             <tr>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Type</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Description</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Computer</th>
-              <th class="px-6 py-3"></th>
+              <th class="px-4 py-2 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">Type</th>
+              <th class="px-4 py-2 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">Description</th>
+              <th class="px-4 py-2 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">Computer</th>
+              <th class="px-4 py-2"></th>
             </tr>
           </thead>
-          <tbody class="bg-white divide-y divide-gray-200">
+          <tbody class="bg-white divide-y divide-stone-200 text-sm">
             <% @components.each do |component| %>
               <tr>
-                <td class="px-6 py-4 whitespace-nowrap font-medium"><%= component.component_type.name %></td>
-                <td class="px-6 py-4 text-gray-500"><%= truncate(component.description, length: 50) || "—" %></td>
-                <td class="px-6 py-4 whitespace-nowrap text-gray-500">
+                <td class="px-4 py-3 whitespace-nowrap font-medium text-stone-900"><%= component.component_type.name %></td>
+                <td class="px-4 py-3 text-stone-600"><%= truncate(component.description, length: 50) || "—" %></td>
+                <td class="px-4 py-3 whitespace-nowrap text-stone-600">
                   <% if component.computer %>
-                    <%= link_to component.computer.computer_model.name, owner_computer_path(@owner, component.computer), class: "text-indigo-600 hover:text-indigo-900" %>
+                    <%= link_to component.computer.computer_model.name, owner_computer_path(@owner, component.computer), class: "text-stone-700 hover:text-stone-900" %>
                   <% else %>
-                    <span class="text-gray-400">Spare</span>
+                    <span class="text-stone-400">Spare</span>
                   <% end %>
                 </td>
-                <td class="px-6 py-4 whitespace-nowrap text-right">
-                  <%= link_to "View", owner_component_path(@owner, component), class: "text-indigo-600 hover:text-indigo-900" %>
+                <td class="px-4 py-3 whitespace-nowrap text-right">
+                  <%= link_to "View", owner_component_path(@owner, component), class: "text-stone-700 hover:text-stone-900" %>
                 </td>
               </tr>
             <% end %>
@@ -114,7 +114,7 @@
         </table>
       </div>
     <% else %>
-      <p class="text-gray-500">No components registered.</p>
+      <p class="text-sm text-stone-500">No components registered.</p>
     <% end %>
   </div>
 </div>

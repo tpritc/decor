@@ -19,40 +19,40 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body class="bg-gray-100 min-h-screen">
-    <nav class="bg-gray-800 shadow">
-      <div class="container mx-auto px-4">
-        <div class="flex justify-between h-16">
-          <div class="flex items-center space-x-8">
-            <%= link_to "Owners", admin_owners_path, class: "font-medium text-gray-300 hover:text-white" %>
-            <%= link_to "Invites", admin_invites_path, class: "font-medium text-gray-300 hover:text-white" %>
-            <%= link_to "Component Types", admin_component_types_path, class: "font-medium text-gray-300 hover:text-white" %>
-            <%= link_to "Computer Models", admin_computer_models_path, class: "font-medium text-gray-300 hover:text-white" %>
+  <body class="bg-stone-100 min-h-screen text-stone-900">
+    <nav class="bg-white border-b border-stone-200">
+      <div class="mx-auto max-w-5xl px-6">
+        <div class="flex justify-between h-14">
+          <div class="flex items-center space-x-6 text-sm">
+            <%= link_to "Owners", admin_owners_path, class: "font-medium text-stone-700 hover:text-stone-900" %>
+            <%= link_to "Invites", admin_invites_path, class: "font-medium text-stone-700 hover:text-stone-900" %>
+            <%= link_to "Component Types", admin_component_types_path, class: "font-medium text-stone-700 hover:text-stone-900" %>
+            <%= link_to "Computer Models", admin_computer_models_path, class: "font-medium text-stone-700 hover:text-stone-900" %>
           </div>
-          <div class="flex items-center">
-            <%= link_to "Exit Admin", root_path, class: "font-medium text-orange-400 hover:text-orange-300" %>
+          <div class="flex items-center text-sm">
+            <%= link_to "Exit Admin", root_path, class: "font-medium text-stone-700 hover:text-stone-900" %>
           </div>
         </div>
       </div>
     </nav>
 
     <% if flash[:notice] %>
-      <div class="bg-green-50 border-b border-green-200">
-        <div class="container mx-auto px-4 py-3 text-green-800">
+      <div class="bg-stone-50 border-b border-stone-200">
+        <div class="mx-auto max-w-5xl px-6 py-3 text-sm text-stone-700 border-l-2 border-stone-400">
           <%= flash[:notice] %>
         </div>
       </div>
     <% end %>
 
     <% if flash[:alert] %>
-      <div class="bg-red-50 border-b border-red-200">
-        <div class="container mx-auto px-4 py-3 text-red-800">
+      <div class="bg-stone-50 border-b border-stone-200">
+        <div class="mx-auto max-w-5xl px-6 py-3 text-sm text-stone-700 border-l-2 border-stone-600">
           <%= flash[:alert] %>
         </div>
       </div>
     <% end %>
 
-    <main class="container mx-auto py-8 px-4">
+    <main class="mx-auto max-w-5xl px-6 py-6">
       <%= yield %>
     </main>
   </body>

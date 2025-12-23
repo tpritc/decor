@@ -1,42 +1,42 @@
-<div class="max-w-6xl mx-auto">
-  <div class="flex justify-between items-start mb-6">
+<div class="max-w-5xl mx-auto">
+  <div class="flex justify-between items-start mb-4">
     <div>
-      <h1 class="text-2xl font-bold"><%= @computer.computer_model.name %></h1>
-      <p class="text-gray-600">Owned by <%= link_to @owner.user_name, @owner, class: "text-indigo-600 hover:text-indigo-900" %></p>
+      <h1 class="text-xl font-semibold"><%= @computer.computer_model.name %></h1>
+      <p class="text-sm text-stone-600">Owned by <%= link_to @owner.user_name, @owner, class: "text-stone-700 hover:text-stone-900" %></p>
     </div>
     <% if current_owner == @owner || admin? %>
       <div class="flex gap-2">
-        <%= link_to "Edit", edit_owner_computer_path(@owner, @computer), class: "bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-md" %>
-        <%= button_to "Delete", owner_computer_path(@owner, @computer), method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-md" %>
+        <%= link_to "Edit", edit_owner_computer_path(@owner, @computer), class: "bg-stone-900 hover:bg-stone-800 text-white text-sm font-medium py-2 px-3 rounded" %>
+        <%= button_to "Delete", owner_computer_path(@owner, @computer), method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "bg-white hover:bg-stone-50 text-stone-800 text-sm font-medium py-2 px-3 rounded border border-stone-300" %>
       </div>
     <% end %>
   </div>
 
-  <div class="bg-white shadow rounded-lg p-6 mb-8">
-    <dl class="grid grid-cols-2 gap-4">
+  <div class="bg-white border border-stone-200 rounded p-4 mb-6">
+    <dl class="grid grid-cols-2 gap-3 text-sm">
       <% if @computer.serial_number.present? %>
         <div>
-          <dt class="text-sm font-medium text-gray-500">Serial Number</dt>
+          <dt class="text-xs font-medium text-stone-500 uppercase tracking-wider">Serial Number</dt>
           <dd class="mt-1"><%= @computer.serial_number %></dd>
         </div>
       <% end %>
       <div>
-        <dt class="text-sm font-medium text-gray-500">Condition</dt>
+        <dt class="text-xs font-medium text-stone-500 uppercase tracking-wider">Condition</dt>
         <dd class="mt-1"><%= @computer.condition_label %></dd>
       </div>
       <div>
-        <dt class="text-sm font-medium text-gray-500">Run Status</dt>
+        <dt class="text-xs font-medium text-stone-500 uppercase tracking-wider">Run Status</dt>
         <dd class="mt-1"><%= @computer.run_status_label %></dd>
       </div>
       <% if @computer.description.present? %>
         <div class="col-span-2">
-          <dt class="text-sm font-medium text-gray-500">Description</dt>
+          <dt class="text-xs font-medium text-stone-500 uppercase tracking-wider">Description</dt>
           <dd class="mt-1 whitespace-pre-wrap"><%= @computer.description %></dd>
         </div>
       <% end %>
       <% if @computer.history.present? %>
         <div class="col-span-2">
-          <dt class="text-sm font-medium text-gray-500">History</dt>
+          <dt class="text-xs font-medium text-stone-500 uppercase tracking-wider">History</dt>
           <dd class="mt-1 whitespace-pre-wrap"><%= @computer.history %></dd>
         </div>
       <% end %>
@@ -44,30 +44,30 @@
   </div>
 
   <div>
-    <div class="flex justify-between items-center mb-4">
-      <h2 class="text-xl font-bold">Components (<%= @components.count %>)</h2>
+    <div class="flex justify-between items-center mb-3">
+      <h2 class="text-lg font-semibold">Components (<%= @components.count %>)</h2>
       <% if current_owner == @owner || admin? %>
-        <%= link_to "Add Component", new_owner_component_path(@owner, computer_id: @computer.id), class: "bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-md text-sm" %>
+        <%= link_to "Add Component", new_owner_component_path(@owner, computer_id: @computer.id), class: "bg-stone-900 hover:bg-stone-800 text-white text-sm font-medium py-2 px-3 rounded" %>
       <% end %>
     </div>
 
     <% if @components.any? %>
-      <div class="bg-white shadow overflow-hidden rounded-lg">
-        <table class="min-w-full divide-y divide-gray-200">
-          <thead class="bg-gray-50">
+      <div class="bg-white border border-stone-200 rounded">
+        <table class="min-w-full divide-y divide-stone-200">
+          <thead class="bg-stone-50">
             <tr>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Type</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Description</th>
-              <th class="px-6 py-3"></th>
+              <th class="px-4 py-2 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">Type</th>
+              <th class="px-4 py-2 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">Description</th>
+              <th class="px-4 py-2"></th>
             </tr>
           </thead>
-          <tbody class="bg-white divide-y divide-gray-200">
+          <tbody class="bg-white divide-y divide-stone-200 text-sm">
             <% @components.each do |component| %>
               <tr>
-                <td class="px-6 py-4 whitespace-nowrap font-medium"><%= component.component_type.name %></td>
-                <td class="px-6 py-4 text-gray-500"><%= truncate(component.description, length: 80) || "—" %></td>
-                <td class="px-6 py-4 whitespace-nowrap text-right">
-                  <%= link_to "View", owner_component_path(@owner, component), class: "text-indigo-600 hover:text-indigo-900" %>
+                <td class="px-4 py-3 whitespace-nowrap font-medium text-stone-900"><%= component.component_type.name %></td>
+                <td class="px-4 py-3 text-stone-600"><%= truncate(component.description, length: 80) || "—" %></td>
+                <td class="px-4 py-3 whitespace-nowrap text-right">
+                  <%= link_to "View", owner_component_path(@owner, component), class: "text-stone-700 hover:text-stone-900" %>
                 </td>
               </tr>
             <% end %>
@@ -75,11 +75,11 @@
         </table>
       </div>
     <% else %>
-      <p class="text-gray-500">No components attached to this computer.</p>
+      <p class="text-sm text-stone-500">No components attached to this computer.</p>
     <% end %>
   </div>
 
   <div class="mt-6">
-    <%= link_to "← Back to #{@owner.user_name}", @owner, class: "text-indigo-600 hover:text-indigo-900" %>
+    <%= link_to "← Back to #{@owner.user_name}", @owner, class: "text-sm text-stone-700 hover:text-stone-900" %>
   </div>
 </div>

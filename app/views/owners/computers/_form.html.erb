@@ -1,8 +1,8 @@
-<%= form_with model: [@owner, computer], class: "space-y-6" do |f| %>
+<%= form_with model: [@owner, computer], class: "space-y-4" do |f| %>
   <% if computer.errors.any? %>
-    <div class="bg-red-50 border border-red-200 rounded-md p-4">
-      <h2 class="text-red-800 font-medium"><%= pluralize(computer.errors.count, "error") %> prohibited this computer from being saved:</h2>
-      <ul class="mt-2 list-disc list-inside text-red-700">
+    <div class="bg-white border border-stone-200 rounded p-3">
+      <h2 class="text-sm font-medium text-stone-800"><%= pluralize(computer.errors.count, "error") %> prohibited this computer from being saved:</h2>
+      <ul class="mt-2 list-disc list-inside text-sm text-stone-700">
         <% computer.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>
@@ -11,40 +11,40 @@
   <% end %>
 
   <div>
-    <%= f.label :computer_model_id, "Model", class: "block text-sm font-medium text-gray-700" %>
+    <%= f.label :computer_model_id, "Model", class: "block text-sm font-medium text-stone-700" %>
     <%= f.collection_select :computer_model_id, ComputerModel.order(:name), :id, :name, { prompt: "Select a model" }, class: field_classes %>
   </div>
 
   <div>
-    <%= f.label :serial_number, class: "block text-sm font-medium text-gray-700" %>
+    <%= f.label :serial_number, class: "block text-sm font-medium text-stone-700" %>
     <%= f.text_field :serial_number, class: field_classes %>
   </div>
 
   <div class="grid grid-cols-2 gap-4">
     <div>
-      <%= f.label :condition, class: "block text-sm font-medium text-gray-700" %>
+      <%= f.label :condition, class: "block text-sm font-medium text-stone-700" %>
       <%= f.select :condition, Computer::CONDITIONS.map { |k, v| [v, k] }, {}, class: field_classes %>
     </div>
 
     <div>
-      <%= f.label :run_status, "Run Status", class: "block text-sm font-medium text-gray-700" %>
+      <%= f.label :run_status, "Run Status", class: "block text-sm font-medium text-stone-700" %>
       <%= f.select :run_status, Computer::RUN_STATUSES.map { |k, v| [v, k] }, {}, class: field_classes %>
     </div>
   </div>
 
   <div>
-    <%= f.label :description, class: "block text-sm font-medium text-gray-700" %>
+    <%= f.label :description, class: "block text-sm font-medium text-stone-700" %>
     <%= f.text_area :description, rows: 4, class: field_classes %>
   </div>
 
   <div>
-    <%= f.label :history, class: "block text-sm font-medium text-gray-700" %>
+    <%= f.label :history, class: "block text-sm font-medium text-stone-700" %>
     <%= f.text_area :history, rows: 4, class: field_classes %>
-    <p class="mt-1 text-sm text-gray-500">Provenance, previous owners, how you acquired it, etc.</p>
+    <p class="mt-1 text-xs text-stone-500">Provenance, previous owners, how you acquired it, etc.</p>
   </div>
 
-  <div class="flex gap-4">
-    <%= f.submit class: "bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-md cursor-pointer" %>
-    <%= link_to "Cancel", (computer.persisted? ? owner_computer_path(@owner, computer) : @owner), class: "bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium py-2 px-4 rounded-md" %>
+  <div class="flex gap-3">
+    <%= f.submit class: "bg-stone-900 hover:bg-stone-800 text-white text-sm font-medium py-2 px-4 rounded cursor-pointer" %>
+    <%= link_to "Cancel", (computer.persisted? ? owner_computer_path(@owner, computer) : @owner), class: "bg-white hover:bg-stone-50 text-stone-800 text-sm font-medium py-2 px-4 rounded border border-stone-300" %>
   </div>
 <% end %>

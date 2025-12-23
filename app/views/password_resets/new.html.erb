@@ -1,17 +1,17 @@
 <div class="max-w-md mx-auto">
-  <h1 class="text-2xl font-bold mb-6">Forgot Password</h1>
+  <h1 class="text-xl font-semibold mb-4">Forgot Password</h1>
 
-  <p class="text-gray-600 mb-6">Enter your email address and we'll send you a link to reset your password.</p>
+  <p class="text-sm text-stone-600 mb-5">Enter your email address and we'll send you a link to reset your password.</p>
 
   <%= form_with url: password_resets_path, class: "space-y-4" do |f| %>
     <div>
-      <%= f.label :email, class: "block text-sm font-medium text-gray-700" %>
+      <%= f.label :email, class: "block text-sm font-medium text-stone-700" %>
       <%= f.email_field :email, required: true, autofocus: true, class: field_classes %>
     </div>
 
     <div class="flex items-center justify-between">
-      <%= f.submit "Send Reset Link", class: "bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-md cursor-pointer" %>
-      <%= link_to "Back to login", new_session_path, class: "text-sm text-indigo-600 hover:text-indigo-500" %>
+      <%= f.submit "Send Reset Link", class: "bg-stone-900 hover:bg-stone-800 text-white text-sm font-medium py-2 px-4 rounded cursor-pointer" %>
+      <%= link_to "Back to login", new_session_path, class: "text-sm text-stone-600 hover:text-stone-900" %>
     </div>
   <% end %>
 </div>
