@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_12_23_140542) do
+ActiveRecord::Schema[8.1].define(version: 2025_12_23_145711) do
   create_table "component_types", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "name", null: false
@@ -54,6 +54,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_23_140542) do
   end
 
   create_table "owners", force: :cascade do |t|
+    t.boolean "admin", default: false, null: false
     t.string "country"
     t.string "country_visibility"
     t.datetime "created_at", null: false
@@ -62,6 +63,8 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_23_140542) do
     t.string "password_digest"
     t.string "real_name"
     t.string "real_name_visibility"
+    t.datetime "reset_password_sent_at"
+    t.string "reset_password_token"
     t.datetime "updated_at", null: false
     t.string "user_name"
     t.string "website"
@@ -70,6 +73,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_23_140542) do
     t.index ["email"], name: "index_owners_on_email", unique: true
     t.index ["email_visibility"], name: "index_owners_on_email_visibility"
     t.index ["real_name_visibility"], name: "index_owners_on_real_name_visibility"
+    t.index ["reset_password_token"], name: "index_owners_on_reset_password_token", unique: true
     t.index ["user_name"], name: "index_owners_on_user_name", unique: true
   end
 

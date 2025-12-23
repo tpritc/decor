@@ -1,0 +1,20 @@
+<div class="max-w-md mx-auto">
+  <h1 class="text-2xl font-bold mb-6">Log In</h1>
+
+  <%= form_with url: session_path, class: "space-y-4" do |f| %>
+    <div>
+      <%= f.label :email, class: "block text-sm font-medium text-gray-700" %>
+      <%= f.email_field :email, required: true, autofocus: true, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" %>
+    </div>
+
+    <div>
+      <%= f.label :password, class: "block text-sm font-medium text-gray-700" %>
+      <%= f.password_field :password, required: true, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" %>
+    </div>
+
+    <div class="flex items-center justify-between">
+      <%= f.submit "Log In", class: "bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-md" %>
+      <%= link_to "Forgot password?", new_password_reset_path, class: "text-sm text-indigo-600 hover:text-indigo-500" %>
+    </div>
+  <% end %>
+</div>

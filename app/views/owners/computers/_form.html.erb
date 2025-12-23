@@ -1,0 +1,50 @@
+<%= form_with model: [@owner, computer], class: "space-y-6" do |f| %>
+  <% if computer.errors.any? %>
+    <div class="bg-red-50 border border-red-200 rounded-md p-4">
+      <h2 class="text-red-800 font-medium"><%= pluralize(computer.errors.count, "error") %> prohibited this computer from being saved:</h2>
+      <ul class="mt-2 list-disc list-inside text-red-700">
+        <% computer.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= f.label :computer_model_id, "Model", class: "block text-sm font-medium text-gray-700" %>
+    <%= f.collection_select :computer_model_id, ComputerModel.order(:name), :id, :name, { prompt: "Select a model" }, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" %>
+  </div>
+
+  <div>
+    <%= f.label :serial_number, class: "block text-sm font-medium text-gray-700" %>
+    <%= f.text_field :serial_number, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" %>
+  </div>
+
+  <div class="grid grid-cols-2 gap-4">
+    <div>
+      <%= f.label :condition, class: "block text-sm font-medium text-gray-700" %>
+      <%= f.select :condition, Computer::CONDITIONS.map { |k, v| [v, k] }, {}, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" %>
+    </div>
+
+    <div>
+      <%= f.label :run_status, "Run Status", class: "block text-sm font-medium text-gray-700" %>
+      <%= f.select :run_status, Computer::RUN_STATUSES.map { |k, v| [v, k] }, {}, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" %>
+    </div>
+  </div>
+
+  <div>
+    <%= f.label :description, class: "block text-sm font-medium text-gray-700" %>
+    <%= f.text_area :description, rows: 4, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" %>
+  </div>
+
+  <div>
+    <%= f.label :history, class: "block text-sm font-medium text-gray-700" %>
+    <%= f.text_area :history, rows: 4, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" %>
+    <p class="mt-1 text-sm text-gray-500">Provenance, previous owners, how you acquired it, etc.</p>
+  </div>
+
+  <div class="flex gap-4">
+    <%= f.submit class: "bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-md cursor-pointer" %>
+    <%= link_to "Cancel", (computer.persisted? ? owner_computer_path(@owner, computer) : @owner), class: "bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium py-2 px-4 rounded-md" %>
+  </div>
+<% end %>

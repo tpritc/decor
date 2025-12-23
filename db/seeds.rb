@@ -42,6 +42,7 @@ owner = Owner.find_or_create_by!(user_name: "VAXorcist") do |o|
   o.real_name_visibility = :public
   o.country_visibility = :public
   o.email_visibility = :members_only
+  o.admin = true
 end
 
 # Computers

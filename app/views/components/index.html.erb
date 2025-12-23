@@ -1,0 +1,42 @@
+<div class="max-w-6xl mx-auto">
+  <h1 class="text-2xl font-bold mb-6">All Components</h1>
+
+  <% if @components.any? %>
+    <div class="bg-white shadow overflow-hidden rounded-lg">
+      <table class="min-w-full divide-y divide-gray-200">
+        <thead class="bg-gray-50">
+          <tr>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Type</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Description</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Computer</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Owner</th>
+            <th class="px-6 py-3"></th>
+          </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-200">
+          <% @components.each do |component| %>
+            <tr>
+              <td class="px-6 py-4 whitespace-nowrap font-medium"><%= component.component_type.name %></td>
+              <td class="px-6 py-4 text-gray-500"><%= truncate(component.description, length: 50) || "—" %></td>
+              <td class="px-6 py-4 whitespace-nowrap text-gray-500">
+                <% if component.computer %>
+                  <%= link_to component.computer.computer_model.name, owner_computer_path(component.owner, component.computer), class: "text-indigo-600 hover:text-indigo-900" %>
+                <% else %>
+                  <span class="text-gray-400">Spare</span>
+                <% end %>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <%= link_to component.owner.user_name, owner_path(component.owner), class: "text-indigo-600 hover:text-indigo-900" %>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-right">
+                <%= link_to "View", owner_component_path(component.owner, component), class: "text-indigo-600 hover:text-indigo-900" %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% else %>
+    <p class="text-gray-500">No components registered yet.</p>
+  <% end %>
+</div>

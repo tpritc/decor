@@ -1,0 +1,24 @@
+<div class="max-w-4xl mx-auto text-center">
+  <h1 class="text-4xl font-bold mb-4">DEC Owner's Registry</h1>
+  <p class="text-lg text-gray-600 mb-8">A registry of Digital Equipment Corporation computers and their owners.</p>
+
+  <div class="grid grid-cols-3 gap-6 mb-8">
+    <div class="bg-white p-6 rounded-lg shadow">
+      <div class="text-3xl font-bold text-indigo-600"><%= @computer_count %></div>
+      <div class="text-gray-600">Computers</div>
+    </div>
+    <div class="bg-white p-6 rounded-lg shadow">
+      <div class="text-3xl font-bold text-indigo-600"><%= @component_count %></div>
+      <div class="text-gray-600">Components</div>
+    </div>
+    <div class="bg-white p-6 rounded-lg shadow">
+      <div class="text-3xl font-bold text-indigo-600"><%= @owner_count %></div>
+      <div class="text-gray-600">Owners</div>
+    </div>
+  </div>
+
+  <div class="flex justify-center gap-4">
+    <%= link_to "Browse Computers", computers_path, class: "bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-md" %>
+    <%= link_to "Browse Owners", owners_path, class: "bg-gray-600 hover:bg-gray-700 text-white font-medium py-2 px-4 rounded-md" %>
+  </div>
+</div>

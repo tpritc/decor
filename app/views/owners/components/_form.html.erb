@@ -1,0 +1,33 @@
+<%= form_with model: [@owner, component], class: "space-y-6" do |f| %>
+  <% if component.errors.any? %>
+    <div class="bg-red-50 border border-red-200 rounded-md p-4">
+      <h2 class="text-red-800 font-medium"><%= pluralize(component.errors.count, "error") %> prohibited this component from being saved:</h2>
+      <ul class="mt-2 list-disc list-inside text-red-700">
+        <% component.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= f.label :component_type_id, "Type", class: "block text-sm font-medium text-gray-700" %>
+    <%= f.collection_select :component_type_id, ComponentType.order(:name), :id, :name, { prompt: "Select a type" }, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" %>
+  </div>
+
+  <div>
+    <%= f.label :computer_id, "Computer", class: "block text-sm font-medium text-gray-700" %>
+    <%= f.collection_select :computer_id, @owner.computers.includes(:computer_model), :id, ->(c) { c.computer_model.name }, { include_blank: "Spare (not attached)" }, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" %>
+    <p class="mt-1 text-sm text-gray-500">Leave blank if this is a spare component not attached to a computer.</p>
+  </div>
+
+  <div>
+    <%= f.label :description, class: "block text-sm font-medium text-gray-700" %>
+    <%= f.text_area :description, rows: 4, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" %>
+  </div>
+
+  <div class="flex gap-4">
+    <%= f.submit class: "bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-md cursor-pointer" %>
+    <%= link_to "Cancel", (component.persisted? ? owner_component_path(@owner, component) : @owner), class: "bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium py-2 px-4 rounded-md" %>
+  </div>
+<% end %>
