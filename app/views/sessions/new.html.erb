@@ -4,12 +4,12 @@
   <%= form_with url: session_path, class: "space-y-4" do |f| %>
     <div>
       <%= f.label :email, class: "block text-sm font-medium text-gray-700" %>
-      <%= f.email_field :email, required: true, autofocus: true, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" %>
+      <%= f.email_field :email, required: true, autofocus: true, class: field_classes %>
     </div>
 
     <div>
       <%= f.label :password, class: "block text-sm font-medium text-gray-700" %>
-      <%= f.password_field :password, required: true, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" %>
+      <%= f.password_field :password, required: true, class: field_classes %>
     </div>
 
     <div class="flex items-center justify-between">

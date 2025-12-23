@@ -15,12 +15,12 @@
 
     <div>
       <%= f.label :user_name, class: "block text-sm font-medium text-gray-700" %>
-      <%= f.text_field :user_name, required: true, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" %>
+      <%= f.text_field :user_name, required: true, class: field_classes %>
     </div>
 
     <div>
       <%= f.label :email, class: "block text-sm font-medium text-gray-700" %>
-      <%= f.email_field :email, required: true, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" %>
+      <%= f.email_field :email, required: true, class: field_classes %>
       <p class="mt-1 text-sm text-gray-500">A password setup link will be sent to this email.</p>
     </div>
 
