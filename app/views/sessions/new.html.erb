@@ -3,8 +3,8 @@
 
   <%= form_with url: session_path, class: "space-y-4" do |f| %>
     <div>
-      <%= f.label :email, class: "block text-sm font-medium text-gray-700" %>
-      <%= f.email_field :email, required: true, autofocus: true, class: field_classes %>
+      <%= f.label :user_name, "Username", class: "block text-sm font-medium text-gray-700" %>
+      <%= f.text_field :user_name, required: true, autofocus: true, class: field_classes %>
     </div>
 
     <div>
