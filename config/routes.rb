@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   resources :computers, only: :index
   resources :components, only: :index
-  resources :owners, only: %i[index show edit update] do
+  resources :owners, only: %i[index show new create edit update] do
     resources :computers, controller: "owners/computers"
     resources :components, controller: "owners/components"
   end

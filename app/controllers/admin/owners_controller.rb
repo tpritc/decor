@@ -8,17 +8,15 @@ module Admin
     end
 
     def new
-      @owner = Owner.new
+      @invite = Invite.new
     end
 
     def create
-      @owner = Owner.new(owner_params)
-      @owner.password = SecureRandom.hex(32) # Temporary password, will be reset
+      @invite = Invite.new(invite_params)
 
-      if @owner.save
-        @owner.generate_password_reset_token!
-        PasswordResetMailer.invite_email(@owner).deliver_later
-        redirect_to admin_owners_path, notice: "Owner created. Invitation email has been sent."
+      if @invite.save
+        InviteMailer.invite_email(@invite).deliver_later
+        redirect_to admin_owners_path, notice: "Invitation sent to #{@invite.email}."
       else
         render :new, status: :unprocessable_entity
       end
@@ -47,6 +45,10 @@ module Admin
 
     def owner_params
       params.require(:owner).permit(:user_name, :email, :admin)
+    end
+
+    def invite_params
+      params.require(:invite).permit(:email)
     end
   end
 end

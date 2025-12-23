@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_12_23_145711) do
+ActiveRecord::Schema[8.1].define(version: 2025_12_23_173121) do
   create_table "component_types", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "name", null: false
@@ -51,6 +51,17 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_23_145711) do
     t.index ["condition"], name: "index_computers_on_condition"
     t.index ["owner_id"], name: "index_computers_on_owner_id"
     t.index ["run_status"], name: "index_computers_on_run_status"
+  end
+
+  create_table "invites", force: :cascade do |t|
+    t.datetime "accepted_at"
+    t.datetime "created_at", null: false
+    t.string "email", null: false
+    t.datetime "sent_at", null: false
+    t.string "token", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_invites_on_email"
+    t.index ["token"], name: "index_invites_on_token", unique: true
   end
 
   create_table "owners", force: :cascade do |t|

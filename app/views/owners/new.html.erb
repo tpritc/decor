@@ -1,0 +1,76 @@
+<div class="max-w-2xl mx-auto">
+  <h1 class="text-3xl font-bold mb-6">Create Your Account</h1>
+
+  <p class="mb-6 text-gray-600">Welcome to DEC Owner's Registry! Please fill in the information below to create your account.</p>
+
+  <%= form_with model: @owner, url: owners_path(token: @invite.token), class: "space-y-6" do |f| %>
+    <% if @owner.errors.any? %>
+      <div class="bg-red-50 border border-red-200 rounded-md p-4">
+        <h2 class="text-red-800 font-medium"><%= pluralize(@owner.errors.count, "error") %> prohibited this account from being created:</h2>
+        <ul class="mt-2 list-disc list-inside text-red-700">
+          <% @owner.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div>
+      <%= f.label :user_name, "Username", class: "block text-sm font-medium text-gray-700" %>
+      <%= f.text_field :user_name, required: true, class: field_classes %>
+      <p class="mt-1 text-sm text-gray-500">This will be your public username on the registry.</p>
+    </div>
+
+    <div>
+      <%= f.label :email, class: "block text-sm font-medium text-gray-700" %>
+      <%= f.email_field :email, required: true, readonly: true, class: "#{field_classes} bg-gray-50" %>
+      <p class="mt-1 text-sm text-gray-500">This email is from your invitation and cannot be changed.</p>
+    </div>
+
+    <div>
+      <%= f.label :password, class: "block text-sm font-medium text-gray-700" %>
+      <%= f.password_field :password, required: true, class: field_classes %>
+    </div>
+
+    <div>
+      <%= f.label :password_confirmation, class: "block text-sm font-medium text-gray-700" %>
+      <%= f.password_field :password_confirmation, required: true, class: field_classes %>
+    </div>
+
+    <hr class="my-6">
+
+    <h2 class="text-xl font-semibold mb-4">Optional Profile Information</h2>
+    <p class="mb-4 text-sm text-gray-600">You can fill these in now or add them to your profile later.</p>
+
+    <div class="grid grid-cols-3 gap-4 items-end">
+      <div class="col-span-2">
+        <%= f.label :real_name, class: "block text-sm font-medium text-gray-700" %>
+        <%= f.text_field :real_name, class: field_classes %>
+      </div>
+      <div>
+        <%= f.label :real_name_visibility, "Visibility", class: "block text-sm font-medium text-gray-700" %>
+        <%= f.select :real_name_visibility, Owner.real_name_visibilities.keys.map { |v| [v.titleize, v] }, {}, class: field_classes %>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-3 gap-4 items-end">
+      <div class="col-span-2">
+        <%= f.label :country, class: "block text-sm font-medium text-gray-700" %>
+        <%= f.select :country, Owner.countries_for_select, { include_blank: "Select a country" }, class: field_classes %>
+      </div>
+      <div>
+        <%= f.label :country_visibility, "Visibility", class: "block text-sm font-medium text-gray-700" %>
+        <%= f.select :country_visibility, Owner.country_visibilities.keys.map { |v| [v.titleize, v] }, {}, class: field_classes %>
+      </div>
+    </div>
+
+    <div>
+      <%= f.label :website, class: "block text-sm font-medium text-gray-700" %>
+      <%= f.url_field :website, placeholder: "https://example.com", class: field_classes %>
+    </div>
+
+    <div class="flex gap-4">
+      <%= f.submit "Create Account", class: "bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-md cursor-pointer" %>
+    </div>
+  <% end %>
+</div>
