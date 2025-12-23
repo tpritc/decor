@@ -10,6 +10,7 @@ one:
   country_visibility: public
   email: alice@example.com
   email_visibility: members_only
+  admin: true
 
 two:
   user_name: bob

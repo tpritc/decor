@@ -1,7 +1,7 @@
 module Admin
   class OwnersController < ApplicationController
     before_action :require_admin
-    before_action :set_owner, only: %i[destroy send_password_reset]
+    before_action :set_owner, only: %i[edit update destroy send_password_reset]
 
     def index
       @owners = Owner.order(:user_name)
@@ -19,6 +19,19 @@ module Admin
         redirect_to admin_owners_path, notice: "Invitation sent to #{@invite.email}."
       else
         render :new, status: :unprocessable_entity
+      end
+    end
+
+    def edit
+    end
+
+    def update
+      if @owner == current_owner && !ActiveModel::Type::Boolean.new.cast(owner_params[:admin])
+        redirect_to edit_admin_owner_path(@owner), alert: "You cannot remove your own admin privileges."
+      elsif @owner.update(owner_params)
+        redirect_to admin_owners_path, notice: "#{@owner.user_name} has been updated."
+      else
+        render :edit, status: :unprocessable_entity
       end
     end
 

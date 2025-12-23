@@ -31,6 +31,7 @@
             <td class="px-6 py-4 whitespace-nowrap text-gray-500"><%= owner.computers.count %></td>
             <td class="px-6 py-4 whitespace-nowrap text-gray-500"><%= owner.components.count %></td>
             <td class="px-6 py-4 whitespace-nowrap text-right space-x-2">
+              <%= link_to "Edit", edit_admin_owner_path(owner), class: "text-indigo-600 hover:text-indigo-900 text-sm" %>
               <%= button_to "Reset Password", send_password_reset_admin_owner_path(owner), class: "text-indigo-600 hover:text-indigo-900 text-sm" %>
               <% unless owner == current_owner %>
                 <%= button_to "Delete", admin_owner_path(owner), method: :delete, data: { turbo_confirm: "Are you sure? This will delete the owner and all their computers and components." }, class: "text-red-600 hover:text-red-900 text-sm" %>

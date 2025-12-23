@@ -6,13 +6,13 @@ class SessionsController < ApplicationController
   end
 
   def create
-    owner = Owner.find_by(email: params[:email]&.downcase)
+    owner = Owner.find_by("LOWER(user_name) = ?", params[:user_name]&.downcase)
 
     if owner&.authenticate(params[:password])
       log_in(owner)
       redirect_to root_path, notice: "Logged in successfully."
     else
-      flash.now[:alert] = "Invalid email or password."
+      flash.now[:alert] = "Invalid username or password."
       render :new, status: :unprocessable_entity
     end
   end

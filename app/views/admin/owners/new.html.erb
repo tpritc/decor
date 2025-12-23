@@ -3,7 +3,7 @@
 
   <p class="mb-6 text-gray-600">Send an invitation to create an owner account. They'll receive an email with a link to set up their profile and password. The invitation will be valid for 30 days.</p>
 
-  <%= form_with model: [:admin, @invite], class: "space-y-4" do |f| %>
+  <%= form_with model: @invite, url: admin_owners_path, class: "space-y-4" do |f| %>
     <% if @invite.errors.any? %>
       <div class="bg-red-50 border border-red-200 rounded-md p-4">
         <h2 class="text-red-800 font-medium"><%= pluralize(@invite.errors.count, "error") %> prohibited this invitation from being sent:</h2>

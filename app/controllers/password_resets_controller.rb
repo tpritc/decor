@@ -21,7 +21,10 @@ class PasswordResetsController < ApplicationController
   end
 
   def update
-    if @owner.update(password_params)
+    if password_params[:password].blank?
+      @owner.errors.add(:password, "can't be blank")
+      render :edit, status: :unprocessable_entity
+    elsif @owner.update(password_params)
       @owner.clear_password_reset_token!
       log_in(@owner)
       redirect_to root_path, notice: "Password has been reset successfully."

@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   resources :password_resets, only: %i[new create edit update], param: :token
 
   namespace :admin do
-    resources :owners, only: %i[index new create destroy] do
+    resources :owners, only: %i[index new create edit update destroy] do
       member do
         post :send_password_reset
       end
