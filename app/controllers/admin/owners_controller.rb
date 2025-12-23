@@ -1,25 +1,9 @@
 module Admin
-  class OwnersController < ApplicationController
-    before_action :require_admin
+  class OwnersController < BaseController
     before_action :set_owner, only: %i[edit update destroy send_password_reset]
 
     def index
       @owners = Owner.order(:user_name)
-    end
-
-    def new
-      @invite = Invite.new
-    end
-
-    def create
-      @invite = Invite.new(invite_params)
-
-      if @invite.save
-        InviteMailer.invite_email(@invite).deliver_later
-        redirect_to admin_owners_path, notice: "Invitation sent to #{@invite.email}."
-      else
-        render :new, status: :unprocessable_entity
-      end
     end
 
     def edit
@@ -58,10 +42,6 @@ module Admin
 
     def owner_params
       params.require(:owner).permit(:user_name, :email, :admin)
-    end
-
-    def invite_params
-      params.require(:invite).permit(:email)
     end
   end
 end

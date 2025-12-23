@@ -1,0 +1,22 @@
+<%= form_with model: [:admin, component_type], class: "space-y-4" do |f| %>
+  <% if component_type.errors.any? %>
+    <div class="bg-red-50 border border-red-200 rounded-md p-4">
+      <h2 class="text-red-800 font-medium"><%= pluralize(component_type.errors.count, "error") %> prohibited this component type from being saved:</h2>
+      <ul class="mt-2 list-disc list-inside text-red-700">
+        <% component_type.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= f.label :name, class: "block text-sm font-medium text-gray-700" %>
+    <%= f.text_field :name, required: true, autofocus: true, class: field_classes %>
+  </div>
+
+  <div class="flex gap-4">
+    <%= f.submit class: "bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-md cursor-pointer" %>
+    <%= link_to "Cancel", admin_component_types_path, class: "bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium py-2 px-4 rounded-md" %>
+  </div>
+<% end %>

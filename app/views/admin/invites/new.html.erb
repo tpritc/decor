@@ -3,7 +3,7 @@
 
   <p class="mb-6 text-gray-600">Send an invitation to create an owner account. They'll receive an email with a link to set up their profile and password. The invitation will be valid for 30 days.</p>
 
-  <%= form_with model: @invite, url: admin_owners_path, class: "space-y-4" do |f| %>
+  <%= form_with model: @invite, url: admin_invites_path, class: "space-y-4" do |f| %>
     <% if @invite.errors.any? %>
       <div class="bg-red-50 border border-red-200 rounded-md p-4">
         <h2 class="text-red-800 font-medium"><%= pluralize(@invite.errors.count, "error") %> prohibited this invitation from being sent:</h2>
@@ -23,7 +23,7 @@
 
     <div class="flex gap-4">
       <%= f.submit "Send Invitation", class: "bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-md cursor-pointer" %>
-      <%= link_to "Cancel", admin_owners_path, class: "bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium py-2 px-4 rounded-md" %>
+      <%= link_to "Cancel", admin_invites_path, class: "bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium py-2 px-4 rounded-md" %>
     </div>
   <% end %>
 </div>

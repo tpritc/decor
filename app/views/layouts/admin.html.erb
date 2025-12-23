@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for(:title) || "Admin - DEC Owner's Registry" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="Decor">
+    <meta name="mobile-web-app-capable" content="yes">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= yield :head %>
+
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body class="bg-gray-100 min-h-screen">
+    <nav class="bg-gray-800 shadow">
+      <div class="container mx-auto px-4">
+        <div class="flex justify-between h-16">
+          <div class="flex items-center space-x-8">
+            <%= link_to "Owners", admin_owners_path, class: "font-medium text-gray-300 hover:text-white" %>
+            <%= link_to "Invites", admin_invites_path, class: "font-medium text-gray-300 hover:text-white" %>
+            <%= link_to "Component Types", admin_component_types_path, class: "font-medium text-gray-300 hover:text-white" %>
+            <%= link_to "Computer Models", admin_computer_models_path, class: "font-medium text-gray-300 hover:text-white" %>
+          </div>
+          <div class="flex items-center">
+            <%= link_to "Exit Admin", root_path, class: "font-medium text-orange-400 hover:text-orange-300" %>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <% if flash[:notice] %>
+      <div class="bg-green-50 border-b border-green-200">
+        <div class="container mx-auto px-4 py-3 text-green-800">
+          <%= flash[:notice] %>
+        </div>
+      </div>
+    <% end %>
+
+    <% if flash[:alert] %>
+      <div class="bg-red-50 border-b border-red-200">
+        <div class="container mx-auto px-4 py-3 text-red-800">
+          <%= flash[:alert] %>
+        </div>
+      </div>
+    <% end %>
+
+    <main class="container mx-auto py-8 px-4">
+      <%= yield %>
+    </main>
+  </body>
+</html>

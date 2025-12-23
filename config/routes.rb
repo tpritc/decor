@@ -14,11 +14,14 @@ Rails.application.routes.draw do
   resources :password_resets, only: %i[new create edit update], param: :token
 
   namespace :admin do
-    resources :owners, only: %i[index new create edit update destroy] do
+    resources :owners, only: %i[index edit update destroy] do
       member do
         post :send_password_reset
       end
     end
+    resources :invites, only: %i[index new create destroy]
+    resources :component_types, only: %i[index new create edit update destroy]
+    resources :computer_models, only: %i[index new create edit update destroy]
   end
 
   get "up" => "rails/health#show", as: :rails_health_check
