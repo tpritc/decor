@@ -7,7 +7,7 @@ image: decor
 # Deploy to these servers.
 servers:
   web:
-    - 192.168.0.1
+    - 46.224.178.173
   # job:
   #   hosts:
   #     - 192.168.0.1
@@ -20,9 +20,9 @@ servers:
 #
 # Don't use this when deploying to multiple web servers (then you have to terminate SSL at your load balancer).
 #
-# proxy:
-#   ssl: true
-#   host: app.example.com
+proxy:
+  ssl: true
+  host: decor.tpritc.com
 
 # Where you keep your container images.
 registry:
@@ -80,9 +80,8 @@ asset_path: /rails/public/assets
 # Configure the image builder.
 builder:
   arch: amd64
-
   # # Build image via remote server (useful for faster amd64 builds on arm64 computers)
-  # remote: ssh://docker@docker-builder-server
+  # remote: ssh://root@46.224.178.173
   #
   # # Pass arguments and secrets to the Docker build process
   # args:
