@@ -17,9 +17,8 @@ module Admin
 
       if @owner.save
         @owner.generate_password_reset_token!
-        # In production, send email here
-        Rails.logger.info "Password setup link for #{@owner.email}: #{edit_password_reset_url(@owner.reset_password_token)}"
-        redirect_to admin_owners_path, notice: "Owner created. Password reset link has been generated."
+        PasswordResetMailer.invite_email(@owner).deliver_later
+        redirect_to admin_owners_path, notice: "Owner created. Invitation email has been sent."
       else
         render :new, status: :unprocessable_entity
       end
@@ -36,9 +35,8 @@ module Admin
 
     def send_password_reset
       @owner.generate_password_reset_token!
-      # In production, send email here
-      Rails.logger.info "Password reset link for #{@owner.email}: #{edit_password_reset_url(@owner.reset_password_token)}"
-      redirect_to admin_owners_path, notice: "Password reset link has been sent to #{@owner.email}."
+      PasswordResetMailer.reset_email(@owner).deliver_later
+      redirect_to admin_owners_path, notice: "Password reset email has been sent to #{@owner.email}."
     end
 
     private

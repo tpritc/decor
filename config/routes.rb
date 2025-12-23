@@ -20,4 +20,5 @@ Rails.application.routes.draw do
   end
 
   get "up" => "rails/health#show", as: :rails_health_check
+  mount LetterOpenerWeb::Engine, at: "/letters" if Rails.env.development?
 end

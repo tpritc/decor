@@ -10,9 +10,7 @@ class PasswordResetsController < ApplicationController
 
     if owner
       owner.generate_password_reset_token!
-      # In a real app, you'd send an email here:
-      # PasswordResetMailer.reset_email(owner).deliver_later
-      Rails.logger.info "Password reset link: #{edit_password_reset_url(owner.reset_password_token)}"
+      PasswordResetMailer.reset_email(owner).deliver_later
     end
 
     # Always show success to prevent email enumeration
