@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(rails db:migrate:*)",
+      "Bash(rails test:*)",
+      "Bash(ruby -c:*)",
+      "Bash(ruby:*)",
+      "Bash(bin/rails test:*)",
+      "Bash(RAILS_ENV=test rails runner:*)",
+      "Bash(bin/rails generate:*)",
+      "Bash(bin/rails db:migrate:*)",
+      "Bash(bundle install:*)"
+    ]
+  }
+}

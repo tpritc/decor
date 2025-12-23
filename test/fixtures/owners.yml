@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_name: alice
+  real_name: Alice Smith
+  website: https://alice.example.com
+  password_digest: <%= BCrypt::Password.create('password123') %>
+  real_name_visibility: public
+  country: US
+  country_visibility: public
+  email: alice@example.com
+  email_visibility: members_only
+
+two:
+  user_name: bob
+  real_name: Bob Jones
+  website:
+  password_digest: <%= BCrypt::Password.create('password456') %>
+  real_name_visibility: private
+  country: GB
+  country_visibility: members_only
+  email: bob@example.com
+  email_visibility: private

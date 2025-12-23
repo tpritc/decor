@@ -1,0 +1,29 @@
+pdp11_memory:
+  owner: one
+  computer: alice_pdp11
+  component_type: memory_board
+  description: Original 256KB core memory board
+
+pdp11_cpu:
+  owner: one
+  computer: alice_pdp11
+  component_type: cpu_board
+  description: KD11-A CPU board
+
+spare_disk:
+  owner: one
+  computer:
+  component_type: disk_drive
+  description: RL02 disk drive, spare for future restoration projects
+
+pdp8_memory:
+  owner: two
+  computer: bob_pdp8
+  component_type: memory_board
+  description: 4K core memory expansion
+
+spare_power_supply:
+  owner: two
+  computer:
+  component_type: power_supply
+  description: Spare H742 power supply, untested

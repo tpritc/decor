@@ -1,0 +1,14 @@
+pdp11_70:
+  name: PDP-11/70
+
+pdp8:
+  name: PDP-8
+
+vax11_780:
+  name: VAX-11/780
+
+pdp10:
+  name: PDP-10
+
+vt100:
+  name: VT100

@@ -1,0 +1,35 @@
+alice_pdp11:
+  owner: one
+  computer_model: pdp11_70
+  serial_number: SN12345
+  description: My first PDP-11, acquired in 1985 from a university surplus sale.
+  condition: original
+  run_status: working
+  history: Originally used at MIT for student labs.
+
+alice_vax:
+  owner: one
+  computer_model: vax11_780
+  serial_number:
+  description: VAX system under restoration
+  condition: original_repaired
+  run_status: repair
+  history:
+
+bob_pdp8:
+  owner: two
+  computer_model: pdp8
+  serial_number: PDP8-7891
+  description: Classic PDP-8 minicomputer
+  condition: modified
+  run_status: working_problems
+  history: Purchased from a collector in 2010. Some expansion cards replaced.
+
+bob_vt100:
+  owner: two
+  computer_model: vt100
+  serial_number: VT100-5432
+  description: Terminal in excellent condition
+  condition: original
+  run_status: working
+  history:

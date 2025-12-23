@@ -1,0 +1,17 @@
+memory_board:
+  name: Memory Board
+
+cpu_board:
+  name: CPU Board
+
+disk_drive:
+  name: Disk Drive
+
+tape_drive:
+  name: Tape Drive
+
+power_supply:
+  name: Power Supply
+
+terminal:
+  name: Terminal
