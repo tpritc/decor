@@ -11,7 +11,8 @@
       "Bash(bin/rails db:migrate:*)",
       "Bash(bundle install:*)",
       "Bash(bin/rails routes:*)",
-      "Bash(bin/rails runner:*)"
+      "Bash(bin/rails runner:*)",
+      "Bash(bin/brakeman:*)"
     ]
   }
 }

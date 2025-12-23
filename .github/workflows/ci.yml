@@ -7,6 +7,7 @@ on:
 
 jobs:
   scan_ruby:
+    name: Security (Ruby)
     runs-on: ubuntu-latest
 
     steps:
@@ -25,6 +26,7 @@ jobs:
         run: bin/bundler-audit
       
   scan_js:
+    name: Security (JS)
     runs-on: ubuntu-latest
 
     steps:
@@ -40,6 +42,7 @@ jobs:
         run: bin/importmap audit
 
   lint:
+    name: Lint
     runs-on: ubuntu-latest
     env:
       RUBOCOP_CACHE_ROOT: tmp/rubocop
@@ -66,6 +69,7 @@ jobs:
         run: bin/rubocop -f github
 
   test:
+    name: Tests (Unit)
     runs-on: ubuntu-latest
 
     # services:
@@ -91,6 +95,7 @@ jobs:
         run: bin/rails db:test:prepare test
 
   system-test:
+    name: Tests (System)
     runs-on: ubuntu-latest
 
     # services:

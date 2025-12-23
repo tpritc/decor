@@ -1,0 +1,14 @@
+{
+  "ignored_warnings": [
+    {
+      "fingerprint": "9023fba7d96a2a9b7851ccf3c728e509cea93f25410968f9f31a9a612c43e7bf",
+      "note": "Admin-only controller (require_admin before_action). Intentional functionality for admins to manage other users' admin status."
+    },
+    {
+      "fingerprint": "82512277ecb377a0cafe9eb294dd0d5c0252ce860cd84e3e839f5529460d8015",
+      "note": "False positive: Owner model validates website format to only allow http/https URLs (line 18), preventing javascript: XSS."
+    }
+  ],
+  "updated": "2025-12-23",
+  "brakeman_version": "7.1.1"
+}
