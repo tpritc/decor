@@ -13,9 +13,9 @@
     <% end %>
 
     <div class="flex items-center">
-      <%= f.check_box :admin, class: "h-4 w-4 text-stone-900 focus:ring-0 border-stone-300 rounded", disabled: @owner == current_owner %>
+      <%= f.check_box :admin, class: "h-4 w-4 text-stone-900 focus:ring-0 border-stone-300 rounded", disabled: @owner == Current.owner %>
       <%= f.label :admin, "Admin privileges", class: "ml-2 block text-sm text-stone-700" %>
-      <% if @owner == current_owner %>
+      <% if @owner == Current.owner %>
         <span class="ml-2 text-sm text-stone-500">(You cannot change your own admin status)</span>
       <% end %>
     </div>

@@ -17,6 +17,15 @@ class Owner < ApplicationRecord
   validates :country, inclusion: { in: ISO3166::Country.codes }, allow_blank: true
   validates :website, format: { with: URI::DEFAULT_PARSER.make_regexp(%w[http https]) }, allow_blank: true
 
+  scope :search, ->(query) do
+    visibility_values = Current.owner.present? ? ["public", "members_only"] : ["public"]
+    user_name_query = where("user_name ILIKE ?", "%#{query}%")
+    real_name_query = where("real_name_visibility IN (?) AND real_name ILIKE ?", visibility_values, "%#{query}%")
+    email_query = where("email_visibility IN (?) AND email ILIKE ?", visibility_values, "%#{query}%")
+
+    user_name_query.or(real_name_query).or(email_query)
+  end
+
   def country_name
     ISO3166::Country[country]&.common_name || ISO3166::Country[country]&.name
   end

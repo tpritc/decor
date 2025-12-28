@@ -5,7 +5,7 @@ module ApplicationHelper
     visible = case visibility
     when "public" then true
     when "members_only" then logged_in?
-    when "private" then current_owner == owner
+    when "private" then Current.owner == owner
     else false
     end
 

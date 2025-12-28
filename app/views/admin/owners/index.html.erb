@@ -30,7 +30,7 @@
             <td class="px-4 py-3 whitespace-nowrap text-stone-600"><%= owner.computers.count %></td>
             <td class="px-4 py-3 whitespace-nowrap text-stone-600"><%= owner.components.count %></td>
             <td class="px-4 py-3 whitespace-nowrap text-right space-x-2 flex items-center justify-end">
-              <% unless owner == current_owner %>
+              <% unless owner == Current.owner %>
                 <%= link_to "Edit", edit_admin_owner_path(owner), class: "text-stone-700 hover:text-stone-900 text-sm" %>
                 <%= button_to "Reset Password", send_password_reset_admin_owner_path(owner), data: { turbo_confirm: "Send a password reset email to #{owner.email}?" }, class: "text-stone-700 hover:text-stone-900 text-sm" %>
                 <%= button_to "Delete", admin_owner_path(owner), method: :delete, data: { turbo_confirm: "Are you sure? This will delete the owner and all their computers and components." }, class: "text-stone-700 hover:text-stone-900 text-sm" %>

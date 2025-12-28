@@ -10,7 +10,7 @@ module Admin
     end
 
     def update
-      if @owner == current_owner && !ActiveModel::Type::Boolean.new.cast(owner_params[:admin])
+      if @owner == Current.owner && !ActiveModel::Type::Boolean.new.cast(owner_params[:admin])
         redirect_to edit_admin_owner_path(@owner), alert: "You cannot remove your own admin privileges."
       elsif @owner.update(owner_params)
         redirect_to admin_owners_path, notice: "#{@owner.user_name} has been updated."
@@ -20,7 +20,7 @@ module Admin
     end
 
     def destroy
-      if @owner == current_owner
+      if @owner == Current.owner
         redirect_to admin_owners_path, alert: "You cannot delete yourself."
       else
         @owner.destroy

@@ -4,7 +4,7 @@
       <h1 class="text-xl font-semibold"><%= @component.component_type.name %></h1>
       <p class="text-sm text-stone-600">Owned by <%= link_to @owner.user_name, @owner, class: "text-stone-700 hover:text-stone-900" %></p>
     </div>
-    <% if current_owner == @owner || admin? %>
+    <% if Current.owner == @owner || admin? %>
       <div class="flex gap-2">
         <%= link_to "Edit", edit_owner_component_path(@owner, @component), class: "bg-stone-900 hover:bg-stone-800 text-white text-sm font-medium py-2 px-3 rounded" %>
         <%= button_to "Delete", owner_component_path(@owner, @component), method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "bg-white hover:bg-stone-50 text-stone-800 text-sm font-medium py-2 px-3 rounded border border-stone-300" %>
