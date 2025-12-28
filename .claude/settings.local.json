@@ -20,5 +20,9 @@
       "Bash(ls:*)",
       "Bash(mkdir:*)"
     ]
+  },
+  "sandbox": {
+    "enabled": true,
+    "autoAllowBashIfSandboxed": true
   }
 }

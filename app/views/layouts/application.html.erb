@@ -19,49 +19,10 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body class="bg-stone-100 min-h-screen text-stone-900">
-    <nav class="bg-white border-b border-stone-200">
-      <div class="mx-auto max-w-5xl px-6">
-        <div class="flex justify-between h-14">
-          <div class="flex items-center space-x-6 text-sm">
-            <%= link_to "Home", root_path, class: "font-medium text-stone-700 hover:text-stone-900" %>
-            <%= link_to "Computers", computers_path, class: "font-medium text-stone-700 hover:text-stone-900" %>
-            <%= link_to "Components", components_path, class: "font-medium text-stone-700 hover:text-stone-900" %>
-            <%= link_to "Owners", owners_path, class: "font-medium text-stone-700 hover:text-stone-900" %>
-          </div>
-          <div class="flex items-center space-x-4 text-sm">
-            <% if logged_in? %>
-              <% if admin? %>
-                <%= link_to "Admin", admin_owners_path, class: "font-medium text-stone-700 hover:text-stone-900" %>
-              <% end %>
-              <%= link_to "My Profile", owner_path(current_owner), class: "font-medium text-stone-700 hover:text-stone-900" %>
-              <%= button_to "Log Out", session_path, method: :delete, class: "font-medium text-stone-700 hover:text-stone-900" %>
-            <% else %>
-              <%= link_to "Log In", new_session_path, class: "font-medium text-stone-900 hover:text-stone-700" %>
-            <% end %>
-          </div>
-        </div>
-      </div>
-    </nav>
+  <body class="bg-white min-h-screen text-stone-900">
+    <%= render "common/navigation" %>
+    <%= render "common/flashes" %>
 
-    <% if flash[:notice] %>
-      <div class="bg-stone-50 border-b border-stone-200">
-        <div class="mx-auto max-w-5xl px-6 py-3 text-sm text-stone-700 border-l-2 border-stone-400">
-          <%= flash[:notice] %>
-        </div>
-      </div>
-    <% end %>
-
-    <% if flash[:alert] %>
-      <div class="bg-stone-50 border-b border-stone-200">
-        <div class="mx-auto max-w-5xl px-6 py-3 text-sm text-stone-700 border-l-2 border-stone-600">
-          <%= flash[:alert] %>
-        </div>
-      </div>
-    <% end %>
-
-    <main class="mx-auto max-w-5xl px-6 py-6">
-      <%= yield %>
-    </main>
+    <main class="p-4"><%= yield %></main>
   </body>
 </html>

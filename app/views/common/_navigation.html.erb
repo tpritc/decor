@@ -1,0 +1,22 @@
+<nav class="grid grid-cols-3 items-center gap-2 px-6 py-4">
+  <div class="flex items-center justify-start gap-6">
+    <%= link_to "Owners", owners_path, class: "font-medium text-stone-700 hover:text-stone-900" %>
+    <%= link_to "Computers", computers_path, class: "font-medium text-stone-700 hover:text-stone-900" %>
+    <%= link_to "Components", components_path, class: "font-medium text-stone-700 hover:text-stone-900" %>
+  </div>
+
+  <div class="flex-1 flex justify-center">
+    <%= link_to root_path do %>
+      <%= image_tag "logo.png", class: "h-8"%>
+    <% end %>
+  </div>
+
+  <div class="flex items-center justify-end gap-6">
+    <% if logged_in? %>
+      <%= link_to "Admin", admin_owners_path, class: "font-medium text-stone-700 hover:text-stone-900" if admin? %>
+      <%= link_to current_owner.user_name, owner_path(current_owner), class: "font-medium text-stone-700 hover:text-stone-900" %>
+    <% else %>
+      <%= link_to "Log In", new_session_path, class: "font-medium text-stone-900 hover:text-stone-700" %>
+    <% end %>
+  </div>
+</nav>

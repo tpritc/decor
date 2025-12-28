@@ -1,24 +1,16 @@
-<div class="max-w-3xl mx-auto text-center">
-  <h1 class="text-3xl font-semibold tracking-tight mb-3 font-mono">DEC Owner's Registry</h1>
-  <p class="text-base text-stone-600 mb-6">A registry of Digital Equipment Corporation computers and their owners.</p>
+<div class="mx-auto max-w-7xl p-4">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-12 my-16">
+    <div class="h-full flex flex-col justify-center gap-8 text-xl">
 
-  <div class="grid grid-cols-3 gap-4 mb-6">
-    <div class="bg-white p-4 rounded border border-stone-200">
-      <div class="text-2xl font-semibold text-stone-900"><%= @computer_count %></div>
-      <div class="text-sm text-stone-500">Computers</div>
-    </div>
-    <div class="bg-white p-4 rounded border border-stone-200">
-      <div class="text-2xl font-semibold text-stone-900"><%= @component_count %></div>
-      <div class="text-sm text-stone-500">Components</div>
-    </div>
-    <div class="bg-white p-4 rounded border border-stone-200">
-      <div class="text-2xl font-semibold text-stone-900"><%= @owner_count %></div>
-      <div class="text-sm text-stone-500">Owners</div>
-    </div>
-  </div>
+      <h1 class="text-5xl font-mono font-bold">
+        Welcome to
+        <%= image_tag "logo.png", alt: "DECOR", class: "inline h-16 -ml-1 -mt-2"%>
+        <span class="sr-only">DECOR</span>
+      </h1>
 
-  <div class="flex justify-center gap-3">
-    <%= link_to "Browse Computers", computers_path, class: "bg-stone-900 hover:bg-stone-800 text-white text-sm font-medium py-2 px-4 rounded" %>
-    <%= link_to "Browse Owners", owners_path, class: "bg-white hover:bg-stone-50 text-stone-800 text-sm font-medium py-2 px-4 rounded border border-stone-300" %>
+      <p>DECOR is a community-driven registry of Digital Equipment Corporation (DEC) computers and their owners. Explore the rich history of DEC by browsing through our extensive database of vintage machines and their components.</p>
+    </div>
+
+    <div class="aspect-square bg-stone-200 text-sm text-stone-400 flex items-center justify-center">Image goes here</div>
   </div>
 </div>
