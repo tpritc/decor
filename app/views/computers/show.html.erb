@@ -2,12 +2,12 @@
   <div class="flex justify-between items-start mb-4">
     <div>
       <h1 class="text-2xl font-semibold"><%= @computer.computer_model.name %></h1>
-      <p class="text-sm text-stone-600">Owned by <%= link_to @owner.user_name, @owner, class: "text-stone-700 hover:text-stone-900" %></p>
+      <p class="text-sm text-stone-600">Owned by <%= link_to @computer.owner.user_name, @computer.owner, class: "font-medium underline text-stone-700 hover:text-stone-900" %></p>
     </div>
-    <% if Current.owner == @owner || admin? %>
+    <% if Current.owner == @computer.owner || admin? %>
       <div class="flex gap-2">
-        <%= link_to "Edit", edit_owner_computer_path(@owner, @computer), class: "bg-stone-900 hover:bg-stone-800 text-white text-sm font-medium py-2 px-3 rounded" %>
-        <%= button_to "Delete", owner_computer_path(@owner, @computer), method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "bg-white hover:bg-stone-50 text-stone-800 text-sm font-medium py-2 px-3 rounded border border-stone-300" %>
+        <%= link_to "Edit", edit_computer_path(@computer.owner, @computer), class: "bg-stone-900 hover:bg-stone-800 text-white text-sm font-medium py-2 px-3 rounded" %>
+        <%= button_to "Delete", computer_path(@computer.owner, @computer), method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "bg-white hover:bg-stone-50 text-stone-800 text-sm font-medium py-2 px-3 rounded border border-stone-300" %>
       </div>
     <% end %>
   </div>
@@ -46,8 +46,8 @@
   <div>
     <div class="flex justify-between items-center mb-3">
       <h2 class="text-lg font-semibold">Components (<%= @components.count %>)</h2>
-      <% if Current.owner == @owner || admin? %>
-        <%= link_to "Add Component", new_owner_component_path(@owner, computer_id: @computer.id), class: "bg-stone-900 hover:bg-stone-800 text-white text-sm font-medium py-2 px-3 rounded" %>
+      <% if Current.owner == @computer.owner || admin? %>
+        <%= link_to "Add Component", new_component_path(computer_id: @computer.id), class: "bg-stone-900 hover:bg-stone-800 text-white text-sm font-medium py-2 px-3 rounded" %>
       <% end %>
     </div>
 
@@ -67,7 +67,7 @@
                 <td class="px-4 py-3 whitespace-nowrap font-medium text-stone-900"><%= component.component_type.name %></td>
                 <td class="px-4 py-3 text-stone-600"><%= truncate(component.description, length: 80) || "—" %></td>
                 <td class="px-4 py-3 whitespace-nowrap text-right">
-                  <%= link_to "View", owner_component_path(@owner, component), class: "text-stone-700 hover:text-stone-900" %>
+                  <%= link_to "View", component_path(component), class: "text-stone-700 hover:text-stone-900" %>
                 </td>
               </tr>
             <% end %>
@@ -80,6 +80,6 @@
   </div>
 
   <div class="mt-6">
-    <%= link_to "← Back to #{@owner.user_name}", @owner, class: "text-sm text-stone-700 hover:text-stone-900" %>
+    <%= link_to "← Back to #{@computer.owner.user_name}", @computer.owner, class: "text-sm text-stone-700 hover:text-stone-900" %>
   </div>
 </div>

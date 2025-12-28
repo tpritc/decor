@@ -1,0 +1,9 @@
+<%= turbo_stream.append :components do %>
+  <% @page.records.each do |component| %>
+    <%= render "component", component: %>
+  <% end %>
+<% end %>
+
+<%= turbo_stream.replace :load_more_components do %>
+  <%= render "shared/load_more", id: :load_more_components, page: @page, path: components_path %>
+<% end %>

@@ -19,10 +19,12 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body class="bg-white min-h-screen text-stone-900">
+  <body class="flex flex-col min-h-screen bg-white text-stone-900">
     <%= render "common/navigation" %>
     <%= render "common/flashes" %>
 
-    <main class="p-4"><%= yield %></main>
+    <main class="flex-1 p-4"><%= yield %></main>
+
+    <%= render "common/footer" %>
   </body>
 </html>

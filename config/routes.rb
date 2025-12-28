@@ -3,13 +3,9 @@ Rails.application.routes.draw do
 
   root "home#index"
 
-  resources :computers, only: :index
-  resources :components, only: :index
-
-  resources :owners, only: %i[index show new create edit update] do
-    resources :computers, controller: "owners/computers"
-    resources :components, controller: "owners/components"
-  end
+  resources :owners
+  resources :computers
+  resources :components
 
   resource :session, only: %i[new create destroy]
   resources :password_resets, only: %i[new create edit update], param: :token

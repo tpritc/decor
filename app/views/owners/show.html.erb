@@ -37,8 +37,8 @@
   <div class="mb-6">
     <div class="flex justify-between items-center mb-3">
       <h2 class="text-lg font-semibold">Computers (<%= @computers.count %>)</h2>
-      <% if Current.owner == @owner || admin? %>
-        <%= link_to "Add Computer", new_owner_computer_path(@owner), class: "bg-stone-900 hover:bg-stone-800 text-white text-sm font-medium py-2 px-3 rounded" %>
+      <% if Current.owner == @owner %>
+        <%= link_to "Add Computer", new_computer_path, class: "bg-stone-900 hover:bg-stone-800 text-white text-sm font-medium py-2 px-3 rounded" %>
       <% end %>
     </div>
 
@@ -62,7 +62,7 @@
                 <td class="px-4 py-3 whitespace-nowrap text-stone-600"><%= computer.condition_label %></td>
                 <td class="px-4 py-3 whitespace-nowrap text-stone-600"><%= computer.run_status_label %></td>
                 <td class="px-4 py-3 whitespace-nowrap text-right">
-                  <%= link_to "View", owner_computer_path(@owner, computer), class: "text-stone-700 hover:text-stone-900" %>
+                  <%= link_to "View", computer_path(computer), class: "text-stone-700 hover:text-stone-900" %>
                 </td>
               </tr>
             <% end %>
@@ -77,8 +77,8 @@
   <div>
     <div class="flex justify-between items-center mb-3">
       <h2 class="text-lg font-semibold">Components (<%= @components.count %>)</h2>
-      <% if Current.owner == @owner || admin? %>
-        <%= link_to "Add Component", new_owner_component_path(@owner), class: "bg-stone-900 hover:bg-stone-800 text-white text-sm font-medium py-2 px-3 rounded" %>
+      <% if Current.owner == @owner %>
+        <%= link_to "Add Component", new_component_path, class: "bg-stone-900 hover:bg-stone-800 text-white text-sm font-medium py-2 px-3 rounded" %>
       <% end %>
     </div>
 
@@ -100,13 +100,13 @@
                 <td class="px-4 py-3 text-stone-600"><%= truncate(component.description, length: 50) || "—" %></td>
                 <td class="px-4 py-3 whitespace-nowrap text-stone-600">
                   <% if component.computer %>
-                    <%= link_to component.computer.computer_model.name, owner_computer_path(@owner, component.computer), class: "text-stone-700 hover:text-stone-900" %>
+                    <%= link_to component.computer.computer_model.name, computer_path(component.computer), class: "text-stone-700 hover:text-stone-900" %>
                   <% else %>
                     <span class="text-stone-400">Spare</span>
                   <% end %>
                 </td>
                 <td class="px-4 py-3 whitespace-nowrap text-right">
-                  <%= link_to "View", owner_component_path(@owner, component), class: "text-stone-700 hover:text-stone-900" %>
+                  <%= link_to "View", component_path(component), class: "text-stone-700 hover:text-stone-900" %>
                 </td>
               </tr>
             <% end %>
