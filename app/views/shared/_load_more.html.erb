@@ -1,0 +1,20 @@
+<%# locals: (id:, page:, path:, infinite: true) %>
+<div id="<%= id %>">
+  <% if page.before_last? %>
+    <%= form_with url: path, method: :get, data: { turbo: true, turbo_stream: true, controller: "load-more", load_more_infinite_value: infinite } do |form| %>
+      <% request.query_parameters.except("page").each do |key, value| %>
+        <%= form.hidden_field key, value: value %>
+      <% end %>
+
+      <%= form.hidden_field :page, value: page.next_param %>
+
+      <% if infinite %>
+        <div class="flex items-center justify-center py-4">
+          <div class="animate-spin h-5 w-5 border-2 border-stone-500 border-t-transparent rounded-full"></div>
+        </div>
+      <% else %>
+        <%= form.submit "Load more", class: "w-full py-2 px-4 bg-stone-200 hover:bg-stone-300 text-stone-700 rounded cursor-pointer" %>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>

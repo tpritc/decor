@@ -1,0 +1,9 @@
+<%= turbo_stream.append :owners do %>
+  <% @page.records.each do |owner| %>
+    <%= render "owner", owner: %>
+  <% end %>
+<% end %>
+
+<%= turbo_stream.replace :load_more_owners do %>
+  <%= render "shared/load_more", id: :load_more_owners, page: @page, path: owners_path %>
+<% end %>

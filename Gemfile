@@ -11,6 +11,7 @@ gem "tailwindcss-rails"
 gem "jbuilder"
 gem "bcrypt"
 gem "countries"
+gem "geared_pagination"
 gem "tzinfo-data", platforms: %i[ windows jruby ]
 gem "solid_cache"
 gem "solid_queue"
