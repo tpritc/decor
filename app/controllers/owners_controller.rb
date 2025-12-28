@@ -4,7 +4,7 @@ class OwnersController < ApplicationController
   before_action :load_invite, only: %i[new create]
 
   def index
-    @owners = Owner.all.order(:user_name)
+    @owners = Owner.all.order(:user_name).search(params[:query])
   end
 
   def new

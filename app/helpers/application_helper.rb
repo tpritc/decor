@@ -17,4 +17,8 @@ module ApplicationHelper
       owner.send(field)
     end
   end
+
+  def empty_state(message)
+    tag.div message, class: "col-span-full flex items-center justify-center min-h-32 p-4 bg-stone-200 text-stone-500 text-sm"
+  end
 end

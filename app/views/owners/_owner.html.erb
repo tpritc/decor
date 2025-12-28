@@ -1,0 +1,15 @@
+<%= link_to owner_path(owner), class: "flex flex-col gap-2 min-h-32 p-4 border border-stone-200 hover:border-stone-300" do %>
+  <div class="flex-1 flex items-start gap-2">
+    <div class="flex-1 font-medium">
+      <%= owner.user_name %>
+    </div>
+
+    <div class="text-stone-500 text-right text-sm">
+      <%= visible_field(owner, :country) { owner.country_emoji } %>
+    </div>
+  </div>
+
+  <div class="text-sm text-stone-500">
+    <%= pluralize(owner.computers.count, "Computer") %> &bull; <%= pluralize(owner.components.count, "Component") %>
+  </div>
+<% end %>

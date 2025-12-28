@@ -1,36 +1,20 @@
 <div class="max-w-5xl mx-auto">
-  <h1 class="text-xl font-semibold mb-4">All Owners</h1>
+  <h1 class="text-xl font-semibold mb-4">Owners</h1>
 
-  <% if @owners.any? %>
-    <div class="bg-white border border-stone-200 rounded">
-      <table class="min-w-full divide-y divide-stone-200">
-        <thead class="bg-stone-50">
-          <tr>
-            <th class="px-4 py-2 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">Username</th>
-            <th class="px-4 py-2 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">Country</th>
-            <th class="px-4 py-2 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">Computers</th>
-            <th class="px-4 py-2 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">Components</th>
-            <th class="px-4 py-2"></th>
-          </tr>
-        </thead>
-        <tbody class="bg-white divide-y divide-stone-200 text-sm">
-          <% @owners.each do |owner| %>
-            <tr>
-              <td class="px-4 py-3 whitespace-nowrap font-medium text-stone-900"><%= owner.user_name %></td>
-              <td class="px-4 py-3 whitespace-nowrap text-stone-600">
-                <%= visible_field(owner, :country) { owner.country_name } %>
-              </td>
-              <td class="px-4 py-3 whitespace-nowrap text-stone-600"><%= owner.computers.count %></td>
-              <td class="px-4 py-3 whitespace-nowrap text-stone-600"><%= owner.components.count %></td>
-              <td class="px-4 py-3 whitespace-nowrap text-right">
-                <%= link_to "View", owner, class: "text-stone-700 hover:text-stone-900" %>
-              </td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
+  <%= form_with url: owners_path, method: :get, local: true, class: "mb-4" do |f| %>
+    <div class="flex gap-2">
+      <%= f.text_field :query, value: params[:query], placeholder: "Search owners by username, real name, or email...", class: field_classes %>
     </div>
-  <% else %>
-    <p class="text-sm text-stone-500">No owners registered yet.</p>
   <% end %>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <% if @owners.any? %>
+      <% @owners.each do |owner| %>
+        <%= render "owner", owner: %>
+      <% end %>
+
+    <% else %>
+      <%= empty_state("No owners found matching your search") %>
+    <% end %>
+  </div>
 </div>
