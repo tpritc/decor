@@ -1,5 +1,5 @@
 <div class="max-w-md w-full mx-auto">
-  <h1 class="text-xl font-semibold mb-4">Edit Owner: <%= @owner.user_name %></h1>
+  <h1 class="text-2xl font-semibold mb-4">Edit Owner: <%= @owner.user_name %></h1>
 
   <%= form_with model: @owner, url: admin_owner_path(@owner), class: "space-y-4" do |f| %>
     <% if @owner.errors.any? %>

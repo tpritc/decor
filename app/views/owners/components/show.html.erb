@@ -1,7 +1,7 @@
-<div class="max-w-5xl mx-auto">
+<div class="max-w-7xl mx-auto">
   <div class="flex justify-between items-start mb-4">
     <div>
-      <h1 class="text-xl font-semibold"><%= @component.component_type.name %></h1>
+      <h1 class="text-2xl font-semibold"><%= @component.component_type.name %></h1>
       <p class="text-sm text-stone-600">Owned by <%= link_to @owner.user_name, @owner, class: "text-stone-700 hover:text-stone-900" %></p>
     </div>
     <% if Current.owner == @owner || admin? %>

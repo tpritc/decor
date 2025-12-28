@@ -21,7 +21,7 @@
 
   <body class="bg-stone-100 min-h-screen text-stone-900">
     <nav class="bg-white border-b border-stone-200">
-      <div class="mx-auto max-w-5xl px-6">
+      <div class="mx-auto max-w-7xl px-6">
         <div class="flex justify-between h-14">
           <div class="flex items-center space-x-6 text-sm">
             <%= link_to "Owners", admin_owners_path, class: "font-medium text-stone-700 hover:text-stone-900" %>
@@ -38,7 +38,7 @@
 
     <% if flash[:notice] %>
       <div class="bg-stone-50 border-b border-stone-200">
-        <div class="mx-auto max-w-5xl px-6 py-3 text-sm text-stone-700 border-l-2 border-stone-400">
+        <div class="mx-auto max-w-7xl px-6 py-3 text-sm text-stone-700 border-l-2 border-stone-400">
           <%= flash[:notice] %>
         </div>
       </div>
@@ -46,13 +46,13 @@
 
     <% if flash[:alert] %>
       <div class="bg-stone-50 border-b border-stone-200">
-        <div class="mx-auto max-w-5xl px-6 py-3 text-sm text-stone-700 border-l-2 border-stone-600">
+        <div class="mx-auto max-w-7xl px-6 py-3 text-sm text-stone-700 border-l-2 border-stone-600">
           <%= flash[:alert] %>
         </div>
       </div>
     <% end %>
 
-    <main class="mx-auto max-w-5xl px-6 py-6">
+    <main class="mx-auto max-w-7xl px-6 py-6">
       <%= yield %>
     </main>
   </body>

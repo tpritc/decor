@@ -1,8 +1,8 @@
 <nav class="grid grid-cols-3 items-center gap-2 px-6 py-4">
   <div class="flex items-center justify-start gap-6">
-    <%= link_to "Owners", owners_path, class: "font-medium text-stone-700 hover:text-stone-900" %>
-    <%= link_to "Computers", computers_path, class: "font-medium text-stone-700 hover:text-stone-900" %>
-    <%= link_to "Components", components_path, class: "font-medium text-stone-700 hover:text-stone-900" %>
+    <%= navigation_link_to "Owners", owners_path %>
+    <%= navigation_link_to "Computers", computers_path %>
+    <%= navigation_link_to "Components", components_path %>
   </div>
 
   <div class="flex-1 flex justify-center">
@@ -13,10 +13,10 @@
 
   <div class="flex items-center justify-end gap-6">
     <% if logged_in? %>
-      <%= link_to "Admin", admin_owners_path, class: "font-medium text-stone-700 hover:text-stone-900" if admin? %>
-      <%= link_to Current.owner.user_name, owner_path(Current.owner), class: "font-medium text-stone-700 hover:text-stone-900" %>
+      <%= navigation_link_to "Admin", admin_owners_path %>
+      <%= navigation_link_to Current.owner.user_name, owner_path(Current.owner), active: false %>
     <% else %>
-      <%= link_to "Log In", new_session_path, class: "font-medium text-stone-900 hover:text-stone-700" %>
+      <%= navigation_link_to "Log In", new_session_path %>
     <% end %>
   </div>
 </nav>

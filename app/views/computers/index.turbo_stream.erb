@@ -1,0 +1,9 @@
+<%= turbo_stream.append :computers do %>
+  <% @page.records.each do |computer| %>
+    <%= render "computer", computer: %>
+  <% end %>
+<% end %>
+
+<%= turbo_stream.replace :load_more_computers do %>
+  <%= render "shared/load_more", id: :load_more_computers, page: @page, path: computers_path %>
+<% end %>

@@ -1,5 +1,5 @@
-<div class="max-w-5xl mx-auto">
-  <h1 class="text-xl font-semibold mb-4">Owners</h1>
+<div class="max-w-7xl mx-auto">
+  <h1 class="text-2xl font-semibold mb-4">Owners</h1>
 
   <%= form_with url: owners_path, method: :get, local: true, class: "flex flex-col gap-2 mb-4" do |form| %>
     <%= form.text_field :query, value: params[:query], placeholder: "Search owners by username, real name, or email...", class: field_classes %>
