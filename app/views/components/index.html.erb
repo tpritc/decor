@@ -4,7 +4,7 @@
   <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
     <%= render "filters" %>
 
-    <div id="components" class="col-span-3 grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div id="components" class="col-span-3 self-start grid grid-cols-1 md:grid-cols-3 gap-4">
       <% if @page.records.any? %>
         <% @page.records.each do |component| %>
           <%= render "component", component: %>

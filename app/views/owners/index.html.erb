@@ -1,19 +1,19 @@
 <div class="max-w-7xl mx-auto">
   <h1 class="text-2xl font-semibold mb-4">Owners</h1>
 
-  <%= form_with url: owners_path, method: :get, local: true, class: "flex flex-col gap-2 mb-4" do |form| %>
-    <%= form.text_field :query, value: params[:query], placeholder: "Search owners by username, real name, or email...", class: field_classes %>
-  <% end %>
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+    <%= render "filters" %>
 
-  <div id="owners" class="grid grid-cols-1 md:grid-cols-3 gap-4">
-    <% if @page.records.any? %>
-      <% @page.records.each do |owner| %>
-        <%= render "owner", owner: %>
+    <div id="owners" class="col-span-3 self-start grid grid-cols-1 md:grid-cols-3 gap-4">
+      <% if @page.records.any? %>
+        <% @page.records.each do |owner| %>
+          <%= render "owner", owner: %>
+        <% end %>
+      <% else %>
+        <%= empty_state("No owners found matching your search") %>
       <% end %>
-    <% else %>
-      <%= empty_state("No owners found matching your search") %>
-    <% end %>
-  </div>
+    </div>
 
-  <%= render "shared/load_more", id: :load_more_owners, page: @page, path: owners_path %>
+    <%= render "shared/load_more", id: :load_more_owners, page: @page, path: owners_path %>
+  </div>
 </div>

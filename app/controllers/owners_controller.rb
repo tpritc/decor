@@ -4,7 +4,14 @@ class OwnersController < ApplicationController
   before_action :load_invite, only: %i[new create]
 
   def index
-    paginate Owner.order(:user_name).search(params[:query])
+    owners = Owner.order(:user_name).search(params[:query])
+
+    if params[:country].present?
+      visibility_values = Current.owner.present? ? %w[public members_only] : %w[public]
+      owners = owners.where(country: params[:country], country_visibility: visibility_values)
+    end
+
+    paginate owners
   end
 
   def new
