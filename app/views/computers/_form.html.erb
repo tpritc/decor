@@ -22,13 +22,13 @@
 
   <div class="grid grid-cols-2 gap-4">
     <div>
-      <%= f.label :condition, class: "block text-sm font-medium text-stone-700" %>
-      <%= f.select :condition, Computer::CONDITIONS.map { |k, v| [v, k] }, {}, class: field_classes %>
+      <%= f.label :condition_id, "Condition", class: "block text-sm font-medium text-stone-700" %>
+      <%= f.collection_select :condition_id, Condition.order(:name), :id, :name, {}, class: field_classes %>
     </div>
 
     <div>
-      <%= f.label :run_status, "Run Status", class: "block text-sm font-medium text-stone-700" %>
-      <%= f.select :run_status, Computer::RUN_STATUSES.map { |k, v| [v, k] }, {}, class: field_classes %>
+      <%= f.label :run_status_id, "Run Status", class: "block text-sm font-medium text-stone-700" %>
+      <%= f.collection_select :run_status_id, RunStatus.order(:name), :id, :name, {}, class: field_classes %>
     </div>
   </div>
 

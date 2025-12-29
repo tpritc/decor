@@ -33,3 +33,13 @@ bob_vt100:
   condition: original
   run_status: working
   history:
+
+# Computer with no association for testing deletion
+unassigned_condition_test:
+  owner: one
+  computer_model: pdp11_70
+  serial_number: TEST-001
+  description: Test computer
+  condition: built
+  run_status: defective
+  history:

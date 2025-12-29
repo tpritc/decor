@@ -8,8 +8,8 @@
     <% {
       "Owner" => computer.owner.user_name,
       "Serial" => computer.serial_number.presence || "--",
-      "Condition" => computer.condition_label,
-      "Run Status" => computer.run_status_label
+      "Condition" => computer.condition.name,
+      "Run Status" => computer.run_status.name
     }.each do |key, value| %>
       <div class="w-full flex items-start gap-2 text-stone-700">
         <span class="text-stone-500"><%= key %></span>

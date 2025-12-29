@@ -1,0 +1,22 @@
+<%= form_with model: [:admin, condition], class: "space-y-4" do |f| %>
+  <% if condition.errors.any? %>
+    <div class="bg-white border border-stone-200 rounded p-3">
+      <h2 class="text-sm font-medium text-stone-800"><%= pluralize(condition.errors.count, "error") %> prohibited this condition from being saved:</h2>
+      <ul class="mt-2 list-disc list-inside text-sm text-stone-700">
+        <% condition.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= f.label :name, class: "block text-sm font-medium text-stone-700" %>
+    <%= f.text_field :name, required: true, autofocus: true, class: field_classes %>
+  </div>
+
+  <div class="flex gap-3">
+    <%= f.submit class: "bg-stone-900 hover:bg-stone-800 text-white text-sm font-medium py-2 px-4 rounded cursor-pointer" %>
+    <%= link_to "Cancel", admin_conditions_path, class: "bg-white hover:bg-stone-50 text-stone-800 text-sm font-medium py-2 px-4 rounded border border-stone-300" %>
+  </div>
+<% end %>

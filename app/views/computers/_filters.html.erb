@@ -18,13 +18,13 @@
   </div>
 
   <div class="flex flex-col">
-    <%= form.label :condition, "Condition", class: "text-sm text-stone-600 font-medium" %>
-    <%= form.select :condition, computer_filter_conditions_options, { selected: computer_filter_conditions_selected, include_blank: "Any" }, { class: field_classes } %>
+    <%= form.label :condition_id, "Condition", class: "text-sm text-stone-600 font-medium" %>
+    <%= form.select :condition_id, computer_filter_conditions_options, { selected: computer_filter_conditions_selected, include_blank: "Any" }, { class: field_classes } %>
   </div>
 
   <div class="flex flex-col">
-    <%= form.label :run_status, "Run Status", class: "text-sm text-stone-600 font-medium" %>
-    <%= form.select :run_status, computer_filter_run_statuses_options, { selected: computer_filter_run_statuses_selected, include_blank: "Any" }, { class: field_classes } %>
+    <%= form.label :run_status_id, "Run Status", class: "text-sm text-stone-600 font-medium" %>
+    <%= form.select :run_status_id, computer_filter_run_statuses_options, { selected: computer_filter_run_statuses_selected, include_blank: "Any" }, { class: field_classes } %>
   </div>
 
   <div class="flex justify-end gap-2">

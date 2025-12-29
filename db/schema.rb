@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_12_23_173121) do
+ActiveRecord::Schema[8.1].define(version: 2025_12_29_120709) do
   create_table "component_types", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "name", null: false
@@ -39,18 +39,25 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_23_173121) do
 
   create_table "computers", force: :cascade do |t|
     t.integer "computer_model_id", null: false
-    t.string "condition", null: false
+    t.integer "condition_id", null: false
     t.datetime "created_at", null: false
     t.text "description"
     t.text "history"
     t.integer "owner_id", null: false
-    t.string "run_status", default: "unknown", null: false
+    t.integer "run_status_id", null: false
     t.string "serial_number"
     t.datetime "updated_at", null: false
     t.index ["computer_model_id"], name: "index_computers_on_computer_model_id"
-    t.index ["condition"], name: "index_computers_on_condition"
+    t.index ["condition_id"], name: "index_computers_on_condition_id"
     t.index ["owner_id"], name: "index_computers_on_owner_id"
-    t.index ["run_status"], name: "index_computers_on_run_status"
+    t.index ["run_status_id"], name: "index_computers_on_run_status_id"
+  end
+
+  create_table "conditions", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "name"
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_conditions_on_name", unique: true
   end
 
   create_table "invites", force: :cascade do |t|
@@ -88,9 +95,18 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_23_173121) do
     t.index ["user_name"], name: "index_owners_on_user_name", unique: true
   end
 
+  create_table "run_statuses", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "name"
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_run_statuses_on_name", unique: true
+  end
+
   add_foreign_key "components", "component_types"
   add_foreign_key "components", "computers"
   add_foreign_key "components", "owners"
   add_foreign_key "computers", "computer_models"
+  add_foreign_key "computers", "conditions"
   add_foreign_key "computers", "owners"
+  add_foreign_key "computers", "run_statuses"
 end

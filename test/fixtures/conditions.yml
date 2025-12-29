@@ -1,0 +1,11 @@
+original:
+  name: Completely original
+
+original_repaired:
+  name: Completely original with small repairs
+
+modified:
+  name: Original with options replaced or removed
+
+built:
+  name: Built from parts

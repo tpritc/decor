@@ -3,19 +3,19 @@ class ComputersController < ApplicationController
   before_action :ensure_computer_belongs_to_current_owner, only: %i[edit update destroy]
 
   def index
-    computers = Computer.includes(:owner, :computer_model)
+    computers = Computer.includes(:owner, :computer_model, :condition, :run_status)
 
     if params[:model].present?
       model = ComputerModel.find(params[:model])
       computers = computers.where(computer_model: model)
     end
 
-    if params[:condition].present?
-      computers = computers.where(condition: params[:condition])
+    if params[:condition_id].present?
+      computers = computers.where(condition_id: params[:condition_id])
     end
 
-    if params[:run_status].present?
-      computers = computers.where(run_status: params[:run_status])
+    if params[:run_status_id].present?
+      computers = computers.where(run_status_id: params[:run_status_id])
     end
 
     computers = case params[:sort]
@@ -75,6 +75,6 @@ class ComputersController < ApplicationController
   end
 
   def computer_params
-    params.require(:computer).permit(:computer_model_id, :serial_number, :condition, :run_status, :description, :history)
+    params.require(:computer).permit(:computer_model_id, :serial_number, :condition_id, :run_status_id, :description, :history)
   end
 end

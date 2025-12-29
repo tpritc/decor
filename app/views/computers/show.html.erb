@@ -22,11 +22,11 @@
       <% end %>
       <div>
         <dt class="text-xs font-medium text-stone-500 uppercase tracking-wider">Condition</dt>
-        <dd class="mt-1"><%= @computer.condition_label %></dd>
+        <dd class="mt-1"><%= @computer.condition.name %></dd>
       </div>
       <div>
         <dt class="text-xs font-medium text-stone-500 uppercase tracking-wider">Run Status</dt>
-        <dd class="mt-1"><%= @computer.run_status_label %></dd>
+        <dd class="mt-1"><%= @computer.run_status.name %></dd>
       </div>
       <% if @computer.description.present? %>
         <div class="col-span-2">

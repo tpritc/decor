@@ -17,6 +17,8 @@ Rails.application.routes.draw do
     resources :invites, only: %i[index new create destroy]
     resources :component_types, only: %i[index new create edit update destroy]
     resources :computer_models, only: %i[index new create edit update destroy]
+    resources :conditions, only: %i[index new create edit update destroy]
+    resources :run_statuses, only: %i[index new create edit update destroy]
   end
 
   get "up" => "rails/health#show", as: :rails_health_check

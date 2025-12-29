@@ -59,8 +59,8 @@
               <tr>
                 <td class="px-4 py-3 whitespace-nowrap font-medium text-stone-900"><%= computer.computer_model.name %></td>
                 <td class="px-4 py-3 whitespace-nowrap text-stone-600"><%= computer.serial_number.presence || "—" %></td>
-                <td class="px-4 py-3 whitespace-nowrap text-stone-600"><%= computer.condition_label %></td>
-                <td class="px-4 py-3 whitespace-nowrap text-stone-600"><%= computer.run_status_label %></td>
+                <td class="px-4 py-3 whitespace-nowrap text-stone-600"><%= computer.condition.name %></td>
+                <td class="px-4 py-3 whitespace-nowrap text-stone-600"><%= computer.run_status.name %></td>
                 <td class="px-4 py-3 whitespace-nowrap text-right">
                   <%= link_to "View", computer_path(computer), class: "text-stone-700 hover:text-stone-900" %>
                 </td>

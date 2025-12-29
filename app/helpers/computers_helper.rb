@@ -27,18 +27,18 @@ module ComputersHelper
   end
 
   def computer_filter_conditions_options
-    Computer::CONDITIONS.map { |key, value| [value, key.to_s] }
+    Condition.order(:name).pluck(:name, :id)
   end
 
   def computer_filter_conditions_selected
-    params[:condition]
+    params[:condition_id]
   end
 
   def computer_filter_run_statuses_options
-    Computer::RUN_STATUSES.map { |key, value| [value, key.to_s] }
+    RunStatus.order(:name).pluck(:name, :id)
   end
 
   def computer_filter_run_statuses_selected
-    params[:run_status]
+    params[:run_status_id]
   end
 end

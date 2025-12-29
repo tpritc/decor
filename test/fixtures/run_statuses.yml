@@ -1,0 +1,14 @@
+unknown:
+  name: Unknown
+
+working:
+  name: Working
+
+working_problems:
+  name: Working with a few problems
+
+repair:
+  name: Under repair
+
+defective:
+  name: Defective
