@@ -40,7 +40,11 @@ class ComponentsController < ApplicationController
     @component = Current.owner.components.build(component_params)
 
     if @component.save
-      redirect_to component_path(@component), notice: "Component was successfully created."
+      if params[:add_another]
+        redirect_to new_component_path(computer_id: @component.computer_id), notice: "Component was successfully created. Add another!"
+      else
+        redirect_to component_path(@component), notice: "Component was successfully created."
+      end
     else
       render :new, status: :unprocessable_entity
     end

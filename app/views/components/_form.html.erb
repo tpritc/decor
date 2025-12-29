@@ -28,6 +28,9 @@
 
   <div class="flex gap-3">
     <%= f.submit class: button_classes(style: :primary) %>
+    <% unless component.persisted? %>
+      <%= f.submit "Create and add another", name: "add_another", class: button_classes(style: :secondary) %>
+    <% end %>
     <%= link_to "Cancel", (component.persisted? ? component_path(component) : components_path), class: button_classes(style: :secondary) %>
   </div>
 <% end %>

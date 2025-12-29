@@ -42,7 +42,11 @@ class ComputersController < ApplicationController
     @computer = Current.owner.computers.build(computer_params)
 
     if @computer.save
-      redirect_to computer_path(@computer), notice: "Computer was successfully created."
+      if params[:add_another]
+        redirect_to new_computer_path, notice: "Computer was successfully created. Add another!"
+      else
+        redirect_to computer_path(@computer), notice: "Computer was successfully created."
+      end
     else
       render :new, status: :unprocessable_entity
     end
