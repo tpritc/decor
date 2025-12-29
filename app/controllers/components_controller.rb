@@ -3,7 +3,30 @@ class ComponentsController < ApplicationController
   before_action :ensure_component_belongs_to_current_owner, only: %i[edit update destroy]
 
   def index
-    paginate Component.includes(:owner, :component_type, :computer).order(created_at: :desc)
+    components = Component.includes(:owner, :component_type, :computer)
+
+    if params[:component_type].present?
+      component_type = ComponentType.find(params[:component_type])
+      components = components.where(component_type: component_type)
+    end
+
+    if params[:computer_model].present?
+      if params[:computer_model] == "unassigned"
+        components = components.where(computer_id: nil)
+      else
+        computer_model = ComputerModel.find(params[:computer_model])
+        components = components.joins(computer: :computer_model).where(computer_models: { id: computer_model.id })
+      end
+    end
+
+    computers = case params[:sort]
+    when "added_asc" then components.order(created_at: :asc)
+    when "added_desc" then components.order(created_at: :desc)
+    else
+      components.order(created_at: :desc)
+    end
+
+    paginate computers
   end
 
   def show

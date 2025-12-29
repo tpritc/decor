@@ -1,0 +1,29 @@
+<%= form_with url: components_path, method: :get, local: true, class: "col-span-1 flex flex-col gap-4 mb-4 p-4 bg-stone-100" do |form| %>
+  <div class="-mb-2 font-medium">Filters</div>
+
+  <div>
+    <%= form.label :query, "Search", class: "text-sm text-stone-600 font-medium" %>
+    <%= form.search_field :query, value: params[:query], placeholder: "Search...", class: field_classes %>
+    <p class="text-xs text-stone-500 mt-1">⚠︎ Search doesn't work for components yet.</p>
+  </div>
+
+  <div class="flex flex-col">
+    <%= form.label :sort, "Sort", class: "text-sm text-stone-600 font-medium" %>
+    <%= form.select :sort, component_sort_options, { selected: component_sort_selected }, { class: field_classes } %>
+  </div>
+
+  <div class="flex flex-col">
+    <%= form.label :component_type, "Type", class: "text-sm text-stone-600 font-medium" %>
+    <%= form.select :component_type, component_filter_component_type_options, { selected: component_filter_component_type_selected, include_blank: "Any" }, { class: field_classes } %>
+  </div>
+
+  <div class="flex flex-col">
+    <%= form.label :computer_model, "Computer Model", class: "text-sm text-stone-600 font-medium" %>
+    <%= form.select :computer_model, component_filter_computer_model_options, { selected: component_filter_computer_model_selected, include_blank: "Any" }, { class: field_classes } %>
+  </div>
+
+  <div class="flex justify-end gap-2">
+    <%= link_to "Reset", components_path, class: button_classes(style: :secondary) %>
+    <%= form.submit "Apply", class: button_classes(style: :secondary) %>
+  </div>
+<% end %>
