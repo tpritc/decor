@@ -3,7 +3,31 @@ class ComputersController < ApplicationController
   before_action :ensure_computer_belongs_to_current_owner, only: %i[edit update destroy]
 
   def index
-    paginate Computer.includes(:owner, :computer_model).order(created_at: :desc)
+    computers = Computer.includes(:owner, :computer_model)
+
+    if params[:model].present?
+      model = ComputerModel.find(params[:model])
+      computers = computers.where(computer_model: model)
+    end
+
+    if params[:condition].present?
+      computers = computers.where(condition: params[:condition])
+    end
+
+    if params[:run_status].present?
+      computers = computers.where(run_status: params[:run_status])
+    end
+
+    computers = case params[:sort]
+    when "added_asc" then computers.order(created_at: :asc)
+    when "added_desc" then computers.order(created_at: :desc)
+    when "model_asc" then computers.joins(:computer_model).order("computer_models.name ASC")
+    when "model_desc" then computers.joins(:computer_model).order("computer_models.name DESC")
+    else
+      computers.order(created_at: :desc)
+    end
+
+    paginate computers
   end
 
   def show

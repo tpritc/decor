@@ -1,20 +1,21 @@
 <div class="max-w-7xl mx-auto">
   <h1 class="text-2xl font-semibold mb-4">Computers</h1>
 
-  <%= form_with url: computers_path, method: :get, local: true, class: "flex flex-col gap-2 mb-4" do |form| %>
-    <%= form.text_field :query, value: params[:query], placeholder: "Search...", class: field_classes %>
-  <% end %>
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+    <%= render "filters" %>
 
-  <div id="computers" class="grid grid-cols-1 md:grid-cols-3 gap-4">
-    <% if @page.records.any? %>
-      <% @page.records.each do |computer| %>
-        <%= render "computer", computer: %>
+    <div id="computers" class="col-span-3 grid grid-cols-1 md:grid-cols-3 gap-4">
+      <% if @page.records.any? %>
+        <% @page.records.each do |computer| %>
+          <%= render "computer", computer: %>
+        <% end %>
+      <% else %>
+        <%= empty_state("No computers found matching your search") %>
       <% end %>
-    <% else %>
-      <%= empty_state("No computers found matching your search") %>
-    <% end %>
+    </div>
+
+    <%= render "shared/load_more", id: :load_more_computers, page: @page, path: computers_path %>
   </div>
 
-  <%= render "shared/load_more", id: :load_more_computers, page: @page, path: computers_path %>
 </div>
 
