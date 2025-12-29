@@ -88,7 +88,7 @@ class OwnersControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_response :unprocessable_entity
-    assert_select ".text-red-800"
+    assert_record_errors
 
     # Verify invite was not accepted
     invite.reload

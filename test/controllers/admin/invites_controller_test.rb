@@ -84,7 +84,7 @@ module Admin
       end
 
       assert_response :unprocessable_entity
-      assert_select ".text-red-700"
+      assert_record_errors
       assert_equal initial_delivery_count, ActionMailer::Base.deliveries.size
     end
 
@@ -101,7 +101,7 @@ module Admin
       end
 
       assert_response :unprocessable_entity
-      assert_select ".text-red-700"
+      assert_record_errors
     end
 
     test "create allows new invite after previous was accepted" do

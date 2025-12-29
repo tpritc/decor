@@ -32,6 +32,29 @@ computer_models.each do |name|
   ComputerModel.find_or_create_by!(name: name)
 end
 
+# Conditions
+conditions = [
+  "Completely original",
+  "Original with options replaced or removed",
+  "Modified",
+  "Frankencomputer"
+]
+
+conditions.each do |name|
+  Condition.find_or_create_by!(name: name)
+end
+
+# Run Statuses
+run_statuses = [
+  "Running",
+  "Not running",
+  "Unknown"
+]
+
+run_statuses.each do |name|
+  RunStatus.find_or_create_by!(name: name)
+end
+
 # Owners
 owner = Owner.find_or_create_by!(user_name: "VAXorcist") do |o|
   o.real_name = "Hans-Ulrich Hölscher"
@@ -52,8 +75,8 @@ computer = Computer.find_or_create_by!(
 ) do |c|
   c.computer_model = ComputerModel.find_by!(name: "MicroVAX II")
   c.description = "630QY-A3"
-  c.condition = :modified
-  c.run_status = :unknown
+  c.condition = Condition.find_by!(name: "Original with options replaced or removed")
+  c.run_status = RunStatus.find_by!(name: "Unknown")
   c.history = "Used as a laboratory computer in a state agency from 1985 onwards; decommissioning date unknown, donated in 2008."
 end
 

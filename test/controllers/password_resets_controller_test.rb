@@ -110,7 +110,7 @@ class PasswordResetsControllerTest < ActionDispatch::IntegrationTest
     }
 
     assert_response :unprocessable_entity
-    assert_select ".text-red-700" # Error messages are shown in red-700
+    assert_record_errors
 
     # Verify password was not changed
     @owner.reload
@@ -157,7 +157,7 @@ class PasswordResetsControllerTest < ActionDispatch::IntegrationTest
     }
 
     assert_response :unprocessable_entity
-    assert_select ".text-red-700" # Error messages are shown
+    assert_record_errors
   end
 
   # Verify 2-hour expiry

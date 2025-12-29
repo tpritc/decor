@@ -2,15 +2,7 @@
   <h1 class="text-2xl font-semibold mb-4">Edit Owner: <%= @owner.user_name %></h1>
 
   <%= form_with model: @owner, url: admin_owner_path(@owner), class: "space-y-4" do |f| %>
-    <% if @owner.errors.any? %>
-      <div class="bg-white border border-stone-200 rounded p-3">
-        <ul class="list-disc list-inside text-sm text-stone-700">
-          <% @owner.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
+    <%= render "common/record_errors", record: @owner %>
 
     <div class="flex items-center">
       <%= f.check_box :admin, class: "h-4 w-4 text-stone-900 focus:ring-0 border-stone-300 rounded", disabled: @owner == Current.owner %>

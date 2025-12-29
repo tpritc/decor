@@ -1,0 +1,13 @@
+<%# locals: (record:) %>
+<% if record.errors.any? %>
+  <div id="record-errors" data-error-count="<%= record.errors.count %>" class="bg-white border border-stone-200 rounded p-3">
+    <h2 class="text-sm font-medium text-stone-800">
+      <%= pluralize(record.errors.count, "error") %> prohibited this record from being saved:
+    </h2>
+    <ul class="mt-2 list-disc list-inside text-sm text-stone-700">
+      <% record.errors.full_messages.each do |message| %>
+        <li data-error-message><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

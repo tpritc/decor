@@ -4,16 +4,7 @@
   <p class="mb-5 text-sm text-stone-600">Welcome to DEC Owner's Registry! Please fill in the information below to create your account.</p>
 
   <%= form_with model: @owner, url: owners_path(token: @invite.token), class: "space-y-4" do |f| %>
-    <% if @owner.errors.any? %>
-      <div class="bg-white border border-stone-200 rounded p-3">
-        <h2 class="text-sm font-medium text-stone-800"><%= pluralize(@owner.errors.count, "error") %> prohibited this account from being created:</h2>
-        <ul class="mt-2 list-disc list-inside text-sm text-stone-700">
-          <% @owner.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
+    <%= render "common/record_errors", record: @owner %>
 
     <div>
       <%= f.label :user_name, "Username", class: "block text-sm font-medium text-stone-700" %>

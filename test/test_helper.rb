@@ -13,3 +13,22 @@ module ActiveSupport
     # Add more helper methods to be used by all tests here...
   end
 end
+
+module RecordErrorsAssertions
+  def assert_record_errors(count: nil)
+    assert_select "#record-errors" do
+      if count
+        assert_select "[data-error-count=?]", count.to_s
+      end
+      assert_select "[data-error-message]", minimum: 1
+    end
+  end
+
+  def assert_no_record_errors
+    assert_select "#record-errors", count: 0
+  end
+end
+
+class ActionDispatch::IntegrationTest
+  include RecordErrorsAssertions
+end

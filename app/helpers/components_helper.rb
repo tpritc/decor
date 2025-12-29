@@ -1,7 +1,7 @@
 module ComponentsHelper
   COMPONENT_SORT_OPTIONS = {
     added_desc: "Added (Newest First)",
-    added_asc: "Added (Oldest First)",
+    added_asc: "Added (Oldest First)"
   }.freeze
 
   def component_sort_options

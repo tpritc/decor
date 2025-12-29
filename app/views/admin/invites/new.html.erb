@@ -4,16 +4,7 @@
   <p class="mb-5 text-sm text-stone-600">Send an invitation to create an owner account. They'll receive an email with a link to set up their profile and password. The invitation will be valid for 30 days.</p>
 
   <%= form_with model: @invite, url: admin_invites_path, class: "space-y-4" do |f| %>
-    <% if @invite.errors.any? %>
-      <div class="bg-white border border-stone-200 rounded p-3">
-        <h2 class="text-sm font-medium text-stone-800"><%= pluralize(@invite.errors.count, "error") %> prohibited this invitation from being sent:</h2>
-        <ul class="mt-2 list-disc list-inside text-sm text-stone-700">
-          <% @invite.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
+    <%= render "common/record_errors", record: @invite %>
 
     <div>
       <%= f.label :email, class: "block text-sm font-medium text-stone-700" %>

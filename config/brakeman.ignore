@@ -5,10 +5,10 @@
       "note": "Admin-only controller (require_admin before_action). Intentional functionality for admins to manage other users' admin status."
     },
     {
-      "fingerprint": "82512277ecb377a0cafe9eb294dd0d5c0252ce860cd84e3e839f5529460d8015",
+      "fingerprint": "020a6fdf656b7a6b5de7173b51bb8c1f65cc6428f63654528a4e00c27eeba625",
       "note": "False positive: Owner model validates website format to only allow http/https URLs (line 18), preventing javascript: XSS."
     }
   ],
-  "updated": "2025-12-23",
-  "brakeman_version": "7.1.1"
+  "updated": "2025-12-29",
+  "brakeman_version": "7.1.2"
 }

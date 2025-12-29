@@ -1,14 +1,5 @@
 <%= form_with model: [:admin, component_type], class: "space-y-4" do |f| %>
-  <% if component_type.errors.any? %>
-    <div class="bg-white border border-stone-200 rounded p-3">
-      <h2 class="text-sm font-medium text-stone-800"><%= pluralize(component_type.errors.count, "error") %> prohibited this component type from being saved:</h2>
-      <ul class="mt-2 list-disc list-inside text-sm text-stone-700">
-        <% component_type.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= render "common/record_errors", record: component_type %>
 
   <div>
     <%= f.label :name, class: "block text-sm font-medium text-stone-700" %>
