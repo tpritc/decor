@@ -1,75 +1,34 @@
 <%= form_with url: computers_path, method: :get, local: true, class: "sticky top-0 col-span-1 flex flex-col gap-4 mb-4 p-4 bg-stone-100" do |form| %>
+  <div class="-mb-2 font-medium">Filters</div>
+
   <div>
-    <%= form.label :query, "Search", class: "font-medium" %>
+    <%= form.label :query, "Search", class: "text-sm text-stone-600 font-medium" %>
     <%= form.search_field :query, value: params[:query], placeholder: "Search...", class: field_classes %>
+    <p class="text-xs text-stone-500 mt-1">⚠︎ Search doesn't work for computers yet.</p>
   </div>
 
-  <div>
-    <%= form.label :sort, "Sort", class: "font-medium" %>
-
-    <% {
-      added_desc: { label: "Date Added (Newest First)", checked: params[:sort] == "added_desc" || params[:sort].blank? },
-      added_asc: { label: "Date Added (Oldest First)", checked: params[:sort] == "added_asc" },
-      model_asc: { label: "Model (A-Z)", checked: params[:sort] == "model_asc" },
-      model_desc: { label: "Model (Z-A)", checked: params[:sort] == "model_desc" }
-    }.each do |key, options| %>
-      <div>
-        <%= form.radio_button :sort, key, checked: options[:checked] %>
-        <%= form.label :sort, options[:label], value: key %>
-      </div>
-    <% end %>
+  <div class="flex flex-col">
+    <%= form.label :sort, "Sort", class: "text-sm text-stone-600 font-medium" %>
+    <%= form.select :sort, computer_sort_options, { selected: computer_sort_selected }, { class: field_classes } %>
   </div>
 
-  <div>
-    <%= form.label :model, "Model", class: "font-medium" %>
-
-    <div>
-      <%= form.radio_button :model, "", checked: params[:model].blank? %>
-      <%= form.label :model, "Any", value: "" %>
-    </div>
-
-    <% ComputerModel.all.each do |model| %>
-      <div>
-        <%= form.radio_button :model, model.id, checked: params[:model] == model.id.to_s %>
-        <%= form.label :model, model.name, value: model.id %>
-      </div>
-    <% end %>
+  <div class="flex flex-col">
+    <%= form.label :model, "Model", class: "text-sm text-stone-600 font-medium" %>
+    <%= form.select :model, computer_filter_models_options, { selected: computer_filter_models_selected, include_blank: "Any" }, { class: field_classes } %>
   </div>
 
-  <div>
-    <%= form.label :condition, "Condition", class: "font-medium" %>
-
-    <div>
-      <%= form.radio_button :condition, "", checked: params[:condition].blank? %>
-      <%= form.label :condition, "Any", value: "" %>
-    </div>
-
-    <% Computer::CONDITIONS.each do |id, label| %>
-      <div>
-        <%= form.radio_button :condition, id, checked: params[:condition] == id %>
-        <%= form.label :condition, label, value: id %>
-      </div>
-    <% end %>
+  <div class="flex flex-col">
+    <%= form.label :condition, "Condition", class: "text-sm text-stone-600 font-medium" %>
+    <%= form.select :condition, computer_filter_conditions_options, { selected: computer_filter_conditions_selected, include_blank: "Any" }, { class: field_classes } %>
   </div>
 
-  <div>
-    <%= form.label :run_status, "Run Status", class: "font-medium" %>
-
-    <div>
-      <%= form.radio_button :run_status, "", checked: params[:run_status].blank? %>
-      <%= form.label :run_status, "Any", value: "" %>
-    </div>
-
-    <% Computer::RUN_STATUSES.each do |id, label| %>
-      <div>
-        <%= form.radio_button :run_status, id, checked: params[:run_status] == id.to_s %>
-        <%= form.label :run_status, label, value: id %>
-      </div>
-    <% end %>
+  <div class="flex flex-col">
+    <%= form.label :run_status, "Run Status", class: "text-sm text-stone-600 font-medium" %>
+    <%= form.select :run_status, computer_filter_run_statuses_options, { selected: computer_filter_run_statuses_selected, include_blank: "Any" }, { class: field_classes } %>
   </div>
 
-  <div class="flex justify-end">
-    <%= link_to "Clear Filters", computers_path %>
-    <%= form.submit "Apply Filters" %>
+  <div class="flex justify-end gap-2">
+    <%= link_to "Clear", computers_path, class: button_classes(style: :secondary) %>
+    <%= form.submit "Apply", class: button_classes(style: :secondary) %>
   </div>
 <% end %>
