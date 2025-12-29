@@ -1,7 +1,7 @@
 <div class="max-w-7xl mx-auto">
   <div class="flex justify-between items-center mb-4">
     <h1 class="text-2xl font-semibold">Run Statuses</h1>
-    <%= link_to "Add Run Status", new_admin_run_status_path, class: "bg-stone-900 hover:bg-stone-800 text-white text-sm font-medium py-2 px-3 rounded" %>
+    <%= link_to "Add Run Status", new_admin_run_status_path, class: button_classes(style: :primary) %>
   </div>
 
   <% if @run_statuses.any? %>

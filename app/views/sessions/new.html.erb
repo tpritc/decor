@@ -13,7 +13,7 @@
     </div>
 
     <div class="flex items-center justify-between">
-      <%= f.submit "Log In", class: "bg-stone-900 hover:bg-stone-800 text-white text-sm font-medium py-2 px-4 rounded" %>
+      <%= f.submit "Log In", class: button_classes(style: :primary) %>
       <%= link_to "Forgot password?", new_password_reset_path, class: "text-sm text-stone-600 hover:text-stone-900" %>
     </div>
   <% end %>
