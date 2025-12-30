@@ -75,7 +75,7 @@ owner = Owner.find_or_create_by!(user_name: "rob") do |o|
   o.password = "password" # placeholder password for seed data
   o.country = "GB" # United Kingdom
   o.real_name_visibility = :public
-  o.country_visibility = :public
+  o.country_visibility = :private
   o.email_visibility = :members_only
   o.admin = true
 end
