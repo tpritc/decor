@@ -68,6 +68,18 @@ owner = Owner.find_or_create_by!(user_name: "VAXorcist") do |o|
   o.admin = true
 end
 
+owner = Owner.find_or_create_by!(user_name: "rob") do |o|
+  o.real_name = "Rob Pritchard"
+  o.website = nil
+  o.email = "rob_pritchard@outlook.com"
+  o.password = "password" # placeholder password for seed data
+  o.country = "GB" # United Kingdom
+  o.real_name_visibility = :public
+  o.country_visibility = :public
+  o.email_visibility = :members_only
+  o.admin = true
+end
+
 # Computers
 computer = Computer.find_or_create_by!(
   owner: owner,
