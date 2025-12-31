@@ -6,8 +6,8 @@
     </div>
     <% if Current.owner == @computer.owner || admin? %>
       <div class="flex gap-2">
-        <%= link_to "Edit", edit_computer_path(@computer.owner, @computer), class: button_classes(style: :primary) %>
-        <%= button_to "Delete", computer_path(@computer.owner, @computer), method: :delete, data: { turbo_confirm: "Are you sure?" }, class: button_classes(style: :secondary) %>
+        <%= link_to "Edit", edit_computer_path(@computer), class: button_classes(style: :primary) %>
+        <%= button_to "Delete", computer_path(@computer), method: :delete, data: { turbo_confirm: "Are you sure?" }, class: button_classes(style: :secondary) %>
       </div>
     <% end %>
   </div>
