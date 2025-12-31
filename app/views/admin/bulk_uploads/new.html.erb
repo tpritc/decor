@@ -9,11 +9,12 @@
       <li><strong>owner_name</strong> (required) - Username for the owner</li>
       <li><strong>email</strong> (optional) - Owner's email address</li>
       <li><strong>serial_number</strong> (optional) - Serial number of the computer</li>
-      <li><strong>computer_model</strong> (optional) - Computer model name</li>
-      <li><strong>condition</strong> (optional) - Condition of the computer</li>
-      <li><strong>run_status</strong> (optional) - Run status of the computer</li>
+      <li><strong>computer_model</strong> (optional) - Computer model name (must match an existing model)</li>
+      <li><strong>condition</strong> (optional) - Condition of the computer or component (must match an existing condition)</li>
+      <li><strong>run_status</strong> (optional) - Run status of the computer (must match an existing run status)</li>
       <li><strong>description</strong> (optional) - Component description</li>
-      <li><strong>component_type</strong> (optional) - Type of component</li>
+      <li><strong>component_type</strong> (optional) - Type of component (must match an existing component type)</li>
+      <li><strong>history</strong> (optional) - History of the component</li>
     </ul>
 
     <p class="text-xs text-gray-500">You can include multiple rows for the same owner to add multiple computers and components. If owner_name already exists, it will be linked to that owner.</p>
@@ -38,9 +39,9 @@
 
   <div class="mt-6 bg-blue-50 border border-blue-200 rounded-lg p-4">
     <h3 class="font-semibold text-blue-900 mb-2">Example CSV Format:</h3>
-    <pre class="text-xs text-blue-800 overflow-x-auto">owner_name,email,serial_number,computer_model,condition,run_status,description,component_type
-john_doe,john@example.com,SN-001,Dell XPS 13,Good,Running,RAM 8GB,Memory
-john_doe,john@example.com,SN-001,Dell XPS 13,Good,Running,SSD 512GB,Storage
-jane_smith,jane@example.com,SN-002,MacBook Pro,Excellent,Running,GPU,Graphics</pre>
+    <pre class="text-xs text-blue-800 overflow-x-auto">owner_name,email,serial_number,computer_model,condition,run_status,description,component_type,history
+john_doe,john@example.com,SN-001,Dell XPS 13,Good,Running,RAM 8GB,Memory,Added 2024
+john_doe,john@example.com,SN-001,Dell XPS 13,Good,Running,SSD 512GB,Storage,Upgraded 2023
+jane_smith,jane@example.com,SN-002,MacBook Pro,Excellent,Running,GPU,Graphics,Original</pre>
   </div>
 </div>

@@ -1,5 +1,5 @@
 class BulkUploadService
-  VALID_CSV_HEADERS = %w[owner_name email serial_number computer_model condition run_status description component_type].freeze
+  VALID_CSV_HEADERS = %w[owner_name email serial_number computer_model condition run_status description component_type history].freeze
   MAX_FILE_SIZE = 10.megabytes
   BATCH_SIZE = 100
 
@@ -23,7 +23,11 @@ class BulkUploadService
     return error_result if errors.any?
 
     begin
-      process_csv
+      ActiveRecord::Base.transaction do
+        process_csv
+        raise ActiveRecord::Rollback if errors.any?
+      end
+      
       return error_result if errors.any?
 
       {
@@ -85,6 +89,7 @@ class BulkUploadService
     run_status = row["run_status"]&.strip
     description = row["description"]&.strip
     component_type = row["component_type"]&.strip
+    history = row["history"]&.strip
 
     # Skip empty rows
     if [owner_name, serial_number, description].all?(&:blank?)
@@ -114,7 +119,7 @@ class BulkUploadService
 
     # Process component if provided
     if description.present? && component_type.present?
-      process_component(owner, description, component_type, serial_number)
+      process_component(owner, description, component_type, serial_number, history, condition)
     end
   end
 
@@ -135,9 +140,32 @@ class BulkUploadService
     computer = owner.computers.find_by(serial_number: serial_number)
     return if computer.present?
 
-    computer_model_record = ComputerModel.find_or_create_by(name: computer_model_name)
-    condition_record = Condition.find_or_create_by(name: condition_name) if condition_name.present?
-    run_status_record = RunStatus.find_or_create_by(name: run_status_name) if run_status_name.present?
+    # Validate that computer_model exists
+    computer_model_record = ComputerModel.find_by(name: computer_model_name)
+    if computer_model_record.nil?
+      errors << "Row #{@row_number}: Computer model '#{computer_model_name}' does not exist. Please create it first."
+      return
+    end
+
+    # Validate that condition exists (if provided)
+    condition_record = nil
+    if condition_name.present?
+      condition_record = Condition.find_by(name: condition_name)
+      if condition_record.nil?
+        errors << "Row #{@row_number}: Condition '#{condition_name}' does not exist. Please create it first."
+        return
+      end
+    end
+
+    # Validate that run_status exists (if provided)
+    run_status_record = nil
+    if run_status_name.present?
+      run_status_record = RunStatus.find_by(name: run_status_name)
+      if run_status_record.nil?
+        errors << "Row #{@row_number}: Run status '#{run_status_name}' does not exist. Please create it first."
+        return
+      end
+    end
 
     computer = owner.computers.build(
       serial_number: serial_number,
@@ -153,8 +181,23 @@ class BulkUploadService
     end
   end
 
-  def process_component(owner, description, component_type_name, serial_number)
-    component_type_record = ComponentType.find_or_create_by(name: component_type_name)
+  def process_component(owner, description, component_type_name, serial_number, history, condition_name)
+    # Validate that component_type exists
+    component_type_record = ComponentType.find_by(name: component_type_name)
+    if component_type_record.nil?
+      errors << "Row #{@row_number}: Component type '#{component_type_name}' does not exist. Please create it first."
+      return
+    end
+
+    # Validate that condition exists (if provided)
+    condition_record = nil
+    if condition_name.present?
+      condition_record = Condition.find_by(name: condition_name)
+      if condition_record.nil?
+        errors << "Row #{@row_number}: Condition '#{condition_name}' does not exist. Please create it first."
+        return
+      end
+    end
 
     # Try to associate with computer if available
     computer = nil
@@ -165,7 +208,9 @@ class BulkUploadService
     component = owner.components.build(
       description: description,
       component_type: component_type_record,
-      computer: computer
+      computer: computer,
+      history: history,
+      condition: condition_record
     )
 
     if component.save
