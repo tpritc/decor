@@ -19,6 +19,7 @@ Rails.application.routes.draw do
     resources :computer_models, only: %i[index new create edit update destroy]
     resources :conditions, only: %i[index new create edit update destroy]
     resources :run_statuses, only: %i[index new create edit update destroy]
+    resources :bulk_uploads, only: %i[new create]
   end
 
   get "up" => "rails/health#show", as: :rails_health_check

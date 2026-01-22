@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_12_29_120709) do
+ActiveRecord::Schema[8.1].define(version: 2025_12_31_133716) do
   create_table "component_types", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "name", null: false
@@ -21,12 +21,15 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_29_120709) do
   create_table "components", force: :cascade do |t|
     t.integer "component_type_id", null: false
     t.integer "computer_id"
+    t.integer "condition_id"
     t.datetime "created_at", null: false
     t.text "description"
+    t.text "history"
     t.integer "owner_id", null: false
     t.datetime "updated_at", null: false
     t.index ["component_type_id"], name: "index_components_on_component_type_id"
     t.index ["computer_id"], name: "index_components_on_computer_id"
+    t.index ["condition_id"], name: "index_components_on_condition_id"
     t.index ["owner_id"], name: "index_components_on_owner_id"
   end
 
@@ -39,12 +42,12 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_29_120709) do
 
   create_table "computers", force: :cascade do |t|
     t.integer "computer_model_id", null: false
-    t.integer "condition_id", null: false
+    t.integer "condition_id"
     t.datetime "created_at", null: false
     t.text "description"
     t.text "history"
     t.integer "owner_id", null: false
-    t.integer "run_status_id", null: false
+    t.integer "run_status_id"
     t.string "serial_number"
     t.datetime "updated_at", null: false
     t.index ["computer_model_id"], name: "index_computers_on_computer_model_id"
@@ -104,6 +107,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_29_120709) do
 
   add_foreign_key "components", "component_types"
   add_foreign_key "components", "computers"
+  add_foreign_key "components", "conditions"
   add_foreign_key "components", "owners"
   add_foreign_key "computers", "computer_models"
   add_foreign_key "computers", "conditions"

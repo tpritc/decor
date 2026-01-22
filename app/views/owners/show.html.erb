@@ -6,14 +6,12 @@
         <p class="text-sm text-stone-600"><%= real_name %></p>
       <% end %>
     </div>
-    <div class="flex gap-2">
-      <% if Current.owner == @owner || admin? %>
-        <%= link_to "Edit Profile", edit_owner_path(@owner), class: button_classes(style: :secondary) %>
-      <% end %>
-      <% if Current.owner == @owner %>
-        <%= button_to "Logout", session_path, method: :delete, class: button_classes(style: :secondary) %>
-      <% end %>
-    </div>
+    <% if Current.owner == @owner || admin? %>
+      <%= link_to "Edit Profile", edit_owner_path(@owner), class: button_classes(style: :secondary) %>
+    <% end %>
+    <% if Current.owner == @owner %>
+      <%= button_to "Logout", session_path, method: :delete, class: button_classes(style: :secondary) %>
+    <% end %>
   </div>
 
   <div class="bg-white border border-stone-200 rounded p-4 mb-6">

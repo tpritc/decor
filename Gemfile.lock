@@ -110,6 +110,7 @@ GEM
     countries (8.0.4)
       unaccent (~> 0.3)
     crass (1.0.6)
+    csv (3.3.5)
     date (3.5.1)
     debug (1.11.1)
       irb (~> 1.10)
@@ -432,6 +433,7 @@ DEPENDENCIES
   bundler-audit
   capybara
   countries
+  csv
   debug
   geared_pagination
   image_processing (~> 1.2)
