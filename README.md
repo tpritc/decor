@@ -1,5 +1,9 @@
 # README
 
+A first change to README.md for testing the steps to work with the
+repo remotely. These two sentences can be removed in the future without
+any precautions.
+
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
