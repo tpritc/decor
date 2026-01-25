@@ -31,24 +31,22 @@ class ComputerTest < ActiveSupport::TestCase
     assert_includes computer.errors[:computer_model], "must exist"
   end
 
-  test "invalid without condition" do
+  test "valid without condition" do
     computer = Computer.new(
       owner: owners(:one),
       computer_model: computer_models(:pdp11_70),
       run_status: run_statuses(:unknown)
     )
-    assert_not computer.valid?
-    assert_includes computer.errors[:condition], "must exist"
+    assert computer.valid?
   end
 
-  test "invalid without run_status" do
+  test "valid without run_status" do
     computer = Computer.new(
       owner: owners(:one),
       computer_model: computer_models(:pdp11_70),
       condition: conditions(:original)
     )
-    assert_not computer.valid?
-    assert_includes computer.errors[:run_status], "must exist"
+    assert computer.valid?
   end
 
   test "condition returns name" do

@@ -27,7 +27,7 @@ class BulkUploadService
         process_csv
         raise ActiveRecord::Rollback if errors.any?
       end
-      
+
       return error_result if errors.any?
 
       {
@@ -56,13 +56,12 @@ class BulkUploadService
 
     unless file.content_type == "text/csv" || file.original_filename.end_with?(".csv")
       errors << "File must be a CSV file"
-      return
     end
   end
 
   def process_csv
     csv_data = CSV.read(file.path, headers: true)
-    
+
     validate_headers!(csv_data.headers)
     return if errors.any?
 
@@ -125,7 +124,7 @@ class BulkUploadService
 
   def find_or_create_owner(user_name, email)
     owner = Owner.find_by(user_name: user_name)
-    
+
     return owner if owner.present?
 
     Owner.create!(

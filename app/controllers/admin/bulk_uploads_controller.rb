@@ -5,7 +5,7 @@ module Admin
 
     def create
       file = params[:file]
-      
+
       unless file.present?
         flash[:alert] = "Please select a file to upload"
         return redirect_to new_admin_bulk_upload_path
