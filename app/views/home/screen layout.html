@@ -1,0 +1,83 @@
+<svg viewBox="0 0 800 900" xmlns="http://www.w3.org/2000/svg">
+  <!-- Define colors -->
+  <defs>
+    <style>
+      .nav-bg { fill: #f5f5f4; }
+      .content-bg { fill: #ffffff; }
+      .footer-bg { fill: #f5f5f4; }
+      .text-col { fill: #e7e5e4; }
+      .image-col { fill: #d6d3d1; }
+      .border { stroke: #292524; stroke-width: 2; fill: none; }
+      .label { font-family: Arial, sans-serif; font-size: 14px; fill: #292524; }
+      .label-large { font-family: Arial, sans-serif; font-size: 16px; font-weight: bold; fill: #292524; }
+      .percentage { font-family: Arial, sans-serif; font-size: 18px; font-weight: bold; fill: #7c2d12; }
+    </style>
+  </defs>
+  
+  <!-- Navigation Bar (Top) - approximately 8% of screen height -->
+  <rect x="0" y="0" width="800" height="72" class="nav-bg"/>
+  <rect x="0" y="0" width="800" height="72" class="border"/>
+  <text x="400" y="35" text-anchor="middle" class="label-large">Navigation Bar</text>
+  <text x="750" y="35" text-anchor="end" class="percentage">~8%</text>
+  <text x="400" y="55" text-anchor="middle" class="label">(Logo, Owners, Computers, Components, Log In)</text>
+  
+  <!-- Main Content Area - approximately 82% of screen height -->
+  <rect x="0" y="72" width="800" height="738" class="content-bg"/>
+  <rect x="0" y="72" width="800" height="738" class="border"/>
+  
+  <!-- Padding top (p-2) - minimal -->
+  <rect x="0" y="72" width="800" height="8" fill="#fef2f2"/>
+  
+  <!-- Content Grid - my-1 margins are very small (0.25rem each) -->
+  <rect x="0" y="84" width="800" height="4" fill="#fee2e2"/>
+  
+  <!-- Two column grid -->
+  <!-- Left Column: Text (50% width) -->
+  <rect x="20" y="92" width="370" height="650" class="text-col"/>
+  <rect x="20" y="92" width="370" height="650" class="border"/>
+  <text x="205" y="120" text-anchor="middle" class="label-large">Left Column - Text Content</text>
+  <text x="205" y="145" text-anchor="middle" class="label">("Welcome to DECOR" heading + description)</text>
+  <text x="350" y="420" text-anchor="end" class="percentage">50% width</text>
+  
+  <!-- Gap between columns -->
+  <rect x="390" y="92" width="20" height="650" fill="#fecaca"/>
+  <text x="400" y="420" text-anchor="middle" class="label" transform="rotate(-90 400 420)">gap-12</text>
+  
+  <!-- Right Column: Image (50% width) -->
+  <rect x="410" y="92" width="370" height="650" class="image-col"/>
+  <rect x="410" y="92" width="370" height="650" class="border"/>
+  <text x="595" y="120" text-anchor="middle" class="label-large">Right Column - VAX Image</text>
+  <text x="595" y="145" text-anchor="middle" class="label">(Image container with grey border)</text>
+  <text x="740" y="420" text-anchor="end" class="percentage">50% width</text>
+  
+  <!-- Image representation (centered, max-height: 50vh) -->
+  <rect x="470" y="200" width="250" height="450" fill="#a8a29e" stroke="#78716c" stroke-width="8"/>
+  <text x="595" y="410" text-anchor="middle" class="label" fill="#ffffff">VAX-11-780.gif</text>
+  <text x="595" y="435" text-anchor="middle" class="label" fill="#ffffff">max-height: 50vh</text>
+  
+  <!-- Bottom margin (my-1) -->
+  <rect x="0" y="746" width="800" height="4" fill="#fee2e2"/>
+  
+  <!-- Padding bottom (p-2) -->
+  <rect x="0" y="754" width="800" height="8" fill="#fef2f2"/>
+  
+  <!-- Main content label -->
+  <text x="750" y="450" text-anchor="end" class="percentage">~82%</text>
+  
+  <!-- Footer - approximately 10% of screen height -->
+  <rect x="0" y="810" width="800" height="90" class="footer-bg"/>
+  <rect x="0" y="810" width="800" height="90" class="border"/>
+  <text x="400" y="845" text-anchor="middle" class="label-large">Footer</text>
+  <text x="750" y="845" text-anchor="end" class="percentage">~10%</text>
+  <text x="400" y="870" text-anchor="middle" class="label">(© 2026 DECOR + trademark notice)</text>
+  
+  <!-- Overall labels -->
+  <text x="10" y="25" class="label">Screen: 1600 x 900</text>
+  
+  <!-- Vertical height breakdown on the side -->
+  <line x1="815" y1="0" x2="815" y2="900" stroke="#991b1b" stroke-width="2"/>
+  <line x1="810" y1="0" x2="820" y2="0" stroke="#991b1b" stroke-width="2"/>
+  <line x1="810" y1="72" x2="820" y2="72" stroke="#991b1b" stroke-width="2"/>
+  <line x1="810" y1="810" x2="820" y2="810" stroke="#991b1b" stroke-width="2"/>
+  <line x1="810" y1="900" x2="820" y2="900" stroke="#991b1b" stroke-width="2"/>
+</svg>

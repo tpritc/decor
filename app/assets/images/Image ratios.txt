@@ -1,0 +1,18 @@
+identify -format "Image: %f\nDimensions: %wx%h\nAspect Ratio: %[fx:w/h]\n\n" VAX-11-780.gif
+
+Image: VAX-11-780-tall.gif
+Dimensions: 506x819
+Aspect Ratio: 0.617827
+
+Image: VT100.gif
+Dimensions: 2776x2464
+Aspect Ratio: 1.12662
+
+Image: VAX-11-780.gif
+Dimensions: 3090x1804
+Aspect Ratio: 1.71286
+
+
+
+
+

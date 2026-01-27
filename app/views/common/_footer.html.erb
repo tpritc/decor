@@ -1,5 +1,16 @@
-<footer class="bg-stone-100 mt-12">
-  <div class="max-w-7xl mx-auto px-4 py-8 text-sm text-stone-600">
+<%# decor/app/views/common/_footer.html.erb - v1.0 %>
+<%# Footer component with copyright and trademark information %>
+<%# Reduced vertical spacing: py-2 for minimal height, mt-2 instead of mt-12 %>
+<%# Optimized to minimize vertical space usage for better layout on 1600x900 screens %>
+
+<footer class="bg-stone-100 mt-2">
+  <%# Changed mt-12 (48px) to mt-2 (8px) to save 40px of vertical space %>
+  <%# This allows more room for the main content area %>
+  
+  <div class="max-w-7xl mx-auto px-4 py-2 text-sm text-stone-600">
+    <%# py-2 provides minimal vertical padding %>
+    <%# text-sm keeps text compact %>
+    
     <p>&copy; <%= Time.current.year %> DECOR</p>
     <p>Digital Equipment Corporation and DEC are trademarks of HP Inc. and Hewlett Packard Enterprise.</p>
   </div>

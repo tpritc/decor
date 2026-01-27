@@ -1,16 +1,118 @@
-<div class="mx-auto max-w-7xl p-4">
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-12 my-16">
-    <div class="h-full flex flex-col justify-center gap-8 text-xl">
+<%# decor/app/views/home/index.html.erb - v4.3 %>
+<%# Home page index view displaying welcome message and rotating daily image %>
+<%# Resolution-independent responsive design using fluid spacing and dynamic calculations %>
+<%# Text on left (~38%), image on right (~62%) - scales with viewport %>
+<%# Aspect ratio always preserved %>
+<%# Works across multiple resolutions: 1600x900, 1920x1080, 1440x810, 1368x768 %>
+<%# Optimized for images with aspect ratios: 0.62 (portrait), 1.13 (square), 1.71 (landscape) %>
+<%# Images rotate daily: automatically detects 1.gif through 100.gif in decor/app/assets/images/ %>
 
-      <h1 class="text-5xl font-mono font-bold">
+<%
+  # Automatically detect how many sequential numbered images exist (1.gif, 2.gif, etc.)
+  # Checks for images up to 100.gif in the assets/images directory
+  # Only counts images that actually exist, so you can have any number from 1 to 100
+  
+  # Get the path to the images directory
+  images_path = Rails.root.join('app', 'assets', 'images')
+  
+  # Count sequential images starting from 1.gif
+  # Stops counting when it finds a missing number in the sequence
+  image_count = 0
+  (1..100).each do |num|
+    image_file = images_path.join("#{num}.gif")
+    if File.exist?(image_file)
+      image_count = num
+    else
+      # Stop counting at the first gap in the sequence
+      # This means images must be numbered sequentially: 1.gif, 2.gif, 3.gif, etc.
+      # If 4.gif is missing, it won't count 5.gif and beyond
+      break
+    end
+  end
+  
+  # Fallback to 1 image if none found (prevents division by zero)
+  image_count = 1 if image_count == 0
+  
+  # Calculate days since epoch (January 1, 1970)
+  # This ensures consistent rotation regardless of server restarts
+  days_since_epoch = (Time.current.to_date - Date.new(1970, 1, 1)).to_i
+  
+  # Calculate which image to show (cycles through 1, 2, 3, ..., N, 1, 2, 3, ...)
+  # Using modulo operator to cycle through available images
+  current_image_number = (days_since_epoch % image_count) + 1
+  
+  # Build the image filename
+  current_image_filename = "#{current_image_number}.gif"
+%>
+
+<div class="mx-auto max-w-7xl h-full flex flex-col justify-center px-4">
+  <%# h-full makes container fill the main area height %>
+  <%# flex flex-col justify-center vertically centers the content %>
+  <%# px-4 adds horizontal padding (scales with base font size) %>
+  
+  <%# Flexbox layout with resolution-independent spacing %>
+  <%# Reduced max gap from 3rem to 2rem to prevent excessive spacing %>
+  <div class="flex flex-row items-center w-full" style="gap: clamp(0.75rem, 1.5vw, 2rem);">
+    <%# flex-row forces side-by-side layout %>
+    <%# items-center vertically centers both columns (text block and image) %>
+    <%# gap: clamp(0.75rem, 1.5vw, 2rem) - reduced fluid spacing: min 12px, scales, max 32px %>
+    <%# w-full ensures container fills available width %>
+    
+    <%# Left column: Welcome text and description %>
+    <%# Increased max width to 600px to prevent logo wrap %>
+    <div class="flex flex-col text-xl flex-shrink-0" style="width: clamp(320px, 38%, 600px); gap: clamp(1rem, 3vh, 2rem);">
+      <%# width: clamp(320px, 38%, 600px) - gives enough room for heading %>
+      <%# gap: clamp(1rem, 3vh, 2rem) - vertical spacing scales with viewport height %>
+      <%# flex-shrink-0 prevents this column from shrinking below specified width %>
+      <%# This entire block aligns as a unit with the image center %>
+      
+      <%# Main heading with inline logo %>
+      <%# Logo sized to match heading using relative units %>
+      <h1 class="font-mono font-bold" style="font-size: clamp(1.75rem, 4.5vw, 2.75rem); line-height: 1.2;">
+        <%# font-size: clamp(1.75rem, 4.5vw, 2.75rem) - prevents wrapping %>
+        <%# line-height: 1.2 keeps heading compact %>
         Welcome to
-        <%= image_tag "logo.png", alt: "DECOR", class: "inline h-16 -ml-1 -mt-2"%>
+        <%= image_tag "logo.png", alt: "DECOR", style: "display: inline; height: 1.1em; vertical-align: middle; margin-left: -0.25rem;" %>
+        <%# Logo height: 1.1em saves horizontal space %>
+        <%# vertical-align: middle centers logo with text baseline %>
         <span class="sr-only">DECOR</span>
       </h1>
-
-      <p>DECOR is a community-driven registry of Digital Equipment Corporation (DEC) computers and their owners. Explore the rich history of DEC by browsing through our extensive database of vintage machines and their components.</p>
+      <p style="font-size: clamp(0.95rem, 1.4vw, 1.15rem); line-height: 1.6;">
+        <%# font-size: clamp(0.95rem, 1.4vw, 1.15rem) - maintains proportion %>
+        <%# line-height: 1.6 provides good readability %>
+        DECOR is a community-driven registry of Digital Equipment Corporation (DEC) computers and their owners. Explore the rich history of DEC by browsing through our extensive database of vintage machines and their components.
+      </p>
     </div>
-
-    <div class="aspect-square bg-stone-200 text-sm text-stone-400 flex items-center justify-center">Image goes here</div>
+    
+    <%# Right column: Daily rotating image in container with narrow grey border %>
+    <%# Takes remaining width (~62%), image scales fluidly with available space %>
+    <%# Image changes daily based on date calculation %>
+    <%# Automatically uses however many images exist (up to 100) %>
+    <div class="flex items-center justify-center flex-1 min-w-0 overflow-hidden">
+      <%# flex-1 takes remaining space after left column %>
+      <%# min-w-0 allows shrinking below content width %>
+      <%# overflow-hidden clips any content that exceeds container bounds %>
+      <%# items-center keeps image centered within its container %>
+      <div class="bg-stone-200 inline-block max-w-full" style="padding: clamp(0.25rem, 0.5vw, 0.5rem);">
+        <%# padding: clamp(0.25rem, 0.5vw, 0.5rem) - fluid border padding: min 4px, scales, max 8px %>
+        <%= image_tag current_image_filename, 
+                      alt: "Digital Equipment Corporation computer - Image #{current_image_number} of #{image_count}", 
+                      class: "block max-w-full",
+                      style: "max-height: 78vh; width: auto; height: auto; object-fit: contain;" %>
+        <%# Image filename is calculated above based on current date %>
+        <%# Changes daily: today might show 1.gif, tomorrow 2.gif, etc. %>
+        <%# Automatically cycles through all available images %>
+      </div>
+    </div>
+    <%# Image selection logic: %>
+    <%# - Automatically detects sequential numbered images (1.gif, 2.gif, ..., 100.gif) %>
+    <%# - Counts only images that actually exist in decor/app/assets/images/ %>
+    <%# - Images must be numbered sequentially starting from 1 %>
+    <%# - Calculates days since epoch for consistency %>
+    <%# - Uses modulo to cycle through available images %>
+    <%# - To add more images: just add numbered GIFs (no code changes needed!) %>
+    <%# - Maximum 100 images supported %>
+    <%# max-height: 78vh - prevents scrolling on all tested resolutions %>
+    <%# object-fit: contain preserves aspect ratio %>
   </div>
 </div>
