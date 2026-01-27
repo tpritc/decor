@@ -1,0 +1,15 @@
+<div class="mx-auto max-w-7xl p-4">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-12 my-16">
+    <div class="h-full flex flex-col justify-center gap-8 text-xl">
+
+      <h1 class="text-5xl font-mono font-bold">
+        Welcome to
+        <%= image_tag "logo.png", alt: "DECOR", class: "inline h-16 -ml-1 -mt-2"%>
+        <span class="sr-only">DECOR</span>
+      </h1>
+
+      <p>DECOR is a community-driven registry of Digital Equipment Corporation (DEC) computers and their owners. Explore the rich history of DEC by browsing through our extensive database of vintage machines and their components.</p>
+    </div>
+    <div class="aspect-square bg-stone-200 text-sm text-stone-400 flex items-center justify-center"><%= image_tag "VAX-11-780.gif", alt: "DECOR", class: "inline h-66 "%></div>
+  </div>
+</div>

@@ -1,0 +1,32 @@
+<%# decor/app/views/home/index.html.erb - v1.5 %>
+<%# Home page index view displaying welcome message and VAX-11-780 image %>
+<%# This view uses Tailwind CSS for responsive grid layout %>
+<%# Layout matches the production site at https://decor.tpritc.com/ %>
+<%# Text on left, tall image container on right %>
+
+<div class="mx-auto max-w-7xl p-4">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-12 my-16">
+    <%# Left column: Welcome text and description %>
+    <%# This column contains the welcome heading and descriptive paragraph %>
+    <div class="flex flex-col justify-center gap-8 text-xl">
+      <%# Main heading with inline logo %>
+      <%# Logo should be sized to match the text-5xl heading (3rem = 48px) %>
+      <%# Using h-12 (3rem) to match text height %>
+      <h1 class="text-5xl font-mono font-bold">
+        Welcome to
+        <%= image_tag "logo.png", alt: "DECOR", class: "inline h-12 align-middle -ml-1" %>
+        <span class="sr-only">DECOR</span>
+      </h1>
+      <p>DECOR is a community-driven registry of Digital Equipment Corporation (DEC) computers and their owners. Explore the rich history of DEC by browsing through our extensive database of vintage machines and their components.</p>
+    </div>
+    
+    <%# Right column: VAX-11-780 image in tall rectangular container %>
+    <%# Container has a portrait aspect ratio to match the VAX-11-780 image dimensions %>
+    <%# Background is stone-200 (light gray) to match the placeholder %>
+    <div class="bg-stone-200 text-sm text-stone-400 flex items-center justify-center min-h-[500px]">
+      <%= image_tag "VAX-11-780.gif", 
+                    alt: "Digital Equipment Corporation VAX-11-780 mainframe computer", 
+                    class: "w-full h-auto" %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,219 @@
+I've created a visual sketch showing the homepage layout breakdown. Here's the percentage division:
+
+Vertical Division (Height):
+
+    Navigation Bar: ~8% of screen height (72px on 900px screen)
+    Main Content Area: ~82% of screen height (738px)
+        Very small padding and margins (p-2 and my-1)
+        Contains the two-column grid
+    Footer: ~10% of screen height (90px)
+
+Horizontal Division (Width) in Main Content:
+
+    Left Column (Text): 50% of content width
+        "Welcome to DECOR" heading with logo
+        Description paragraph
+    Gap: gap-12 (3rem/48px between columns)
+    Right Column (Image): 50% of content width
+        VAX-11-780 image with grey border
+        Image constrained to max-height: 50vh (50% of viewport height)
+
+The issue with scrolling on 1600x900 is that even at 50vh, the image plus navigation and footer exceed 900px. Would you like me to reduce the image to 45vh or 40vh to ensure it fits completely?
+
+There's too much space between the bottom end of the image in the Horizontal Division and the top end of the footer (larger than the footer itself), why? 
+
+Where is the parent of Navigation Bar, Main Content Area, and Footer defined?
+
+Is it possible to have the footer at the bootom of the page (regardless of the screen resolution) and fit in the picture so that the space between navigation and footer is used maximal (with a little gap of course)?
+
+
+There is still unwanted large free space between the main part and the footer. 
+
+The picture still doesn't fill the availabe height.
+I think there are two possible reasons:
+I changed the footer manually for smaller height, can that be the cause?
+What happens when the picture is so wide that it fills half of the width before filling the vertical space?
+Explain the calculations you made in index.html.erb
+
+
+Great questions! Let me address each one:
+1. Footer Height Change
+
+Yes, that's definitely a cause! If you reduced the footer height, then my calc(100vh - 200px) is subtracting too much. The 200px was based on the original footer (~90px). If your footer is now smaller, we're leaving unnecessary empty space.
+2. Width Limiting Height
+
+Yes, this is likely the main problem! The image has this constraint:
+css
+
+style="max-height: calc(100vh - 200px); width: auto;"
+
+The width: auto maintains the image's aspect ratio. Your VAX-11-780.gif is 680x282 pixels, which means it's very wide (aspect ratio ~2.4:1 - more than twice as wide as it is tall).
+
+What happens:
+
+    The right column is limited to 50% of the screen width (because of grid-cols-2)
+    On a 1600px wide screen, the right column is ~800px wide (minus gap and padding, maybe ~750px)
+    If the image tries to fill that 750px width, at aspect ratio 2.4:1, it would only be ~312px tall
+    So the width constraint hits first before the height constraint!
+
+3. Calculation Explanation
+
+In decor/app/views/home/index.html.erb v2.3:
+erb
+
+style="max-height: calc(100vh - 200px); width: auto;"
+
+The calculation:
+
+    100vh = 100% of viewport height = 900px on your screen
+    -200px = subtract space for:
+        Navigation bar: ~72px
+        Footer: ~90px (but you changed this!)
+        Padding/margins: ~38px (from main p-1, container padding, grid my-1)
+    Result: 900px - 200px = 700px maximum height for image
+
+But the width wins! Because the image is so wide relative to its height, it fills the column width first and stops growing.
+Solution
+
+We need to either:
+
+    Remove the width constraint and let the image be as wide as needed to reach the height limit
+    Use a different approach with CSS that prioritizes height over width
+
+Let me create a fix:
+decor/app/views/home/index.html.erb
+Code ∙ Version 19 
+
+I've updated decor/app/views/home/index.html.erb to v2.4 with these key changes:
+
+Changes:
+
+    Reduced subtraction from 200px to 180px - accounts for your smaller footer
+    Changed max-height to height - forces the image to fill the calculated height instead of just limiting it
+    Added overflow-visible to the container - allows the wide image to extend beyond the column boundaries if needed
+
+However, this might make the image too wide and overlap with the left column.
+
+Tell me:
+
+    What's the actual height of your footer now (in pixels)?
+    Would you prefer to:
+        Let the image extend beyond its column (might overlap)?
+        Keep the image contained but smaller (current problem)?
+        Change the grid to give the image column more width (like 60% width for image, 40% for text)?
+
+First you get the new footer definition:
+
+<%# decor/app/views/common/_footer.html.erb %>
+
+<%# reduced py-8 to py-2 to make footer less high %>
+
+<footer class="bg-stone-100 mt-12">
+  <div class="max-w-7xl mx-auto px-4 py-2 text-sm text-stone-600">
+    <p>&copy; <%= Time.current.year %> DECOR</p>
+    <p>Digital Equipment Corporation and DEC are trademarks of HP Inc. and Hewlett Packard Enterprise.</p>
+  </div>
+</footer>
+
+Second you get the current navigation definition, because I cannot remeber if I changed that, too
+
+<nav class="grid grid-cols-3 items-center gap-2 px-6 py-4">
+  <div class="flex items-center justify-start gap-6">
+    <%= navigation_link_to "Owners", owners_path %>
+    <%= navigation_link_to "Computers", computers_path %>
+    <%= navigation_link_to "Components", components_path %>
+  </div>
+
+  <div class="flex-1 flex justify-center">
+    <%= link_to root_path do %>
+      <%= image_tag "logo.png", class: "h-8"%>
+    <% end %>
+  </div>
+
+  <div class="flex items-center justify-end gap-6">
+    <% if logged_in? %>
+      <%= navigation_link_to "Admin", admin_owners_path %>
+      <%= navigation_link_to Current.owner.user_name, owner_path(Current.owner), active: false %>
+    <% else %>
+      <%= navigation_link_to "Log In", new_session_path %>
+    <% end %>
+  </div>
+</nav>
+
+Third:
+
+The aspect ratio of the picture must NOT be changed, but this happens now when i choose a magnificatiom < ~150%
+
+Thank you for the details! Now I can calculate accurately:
+
+Current spacing breakdown:
+
+    Navigation: py-4 = 0.5rem top + 0.5rem bottom padding, plus content ≈ 56px total
+    Footer: py-2 = 0.5rem top + 0.5rem bottom padding, plus content ≈ 48px total
+    Main padding: p-1 = 0.25rem ≈ 4px
+    Footer top margin: mt-12 = 3rem ≈ 48px
+    Grid margins: minimal
+
+Total to subtract: ~56 + 48 + 4 + 48 = 156px
+
+The aspect ratio problem: You're right - using height: instead of max-height: forces the height and distorts the image. We need to go back to max-height: but solve the width problem differently.
+
+The issue is the grid column is too narrow. Let me change the grid proportions:
+decor/app/views/home/index.html.erb
+Code 
+
+I've updated decor/app/views/home/index.html.erb to version 2.5 with these key changes:
+
+Main fixes:
+
+    Changed grid from equal columns to 40%/60% split: grid-cols-[2fr_3fr]
+        Left text column: 40% width (narrower)
+        Right image column: 60% width (wider)
+        This gives the wide VAX image more horizontal space to grow
+
+    Accurate calculation: calc(100vh - 160px) based on your actual dimensions:
+        Nav: ~56px
+        Footer: ~48px
+        Footer margin: ~48px
+        Other: ~8px
+        Total: ~160px
+
+    Back to max-height (not height) to preserve aspect ratio
+
+    Added max-width: 100% to prevent overflow beyond the column
+
+With 60% width for the image column, the wide VAX image should now be able to grow much taller before hitting the width constraint. The aspect ratio will always be preserved.
+Save and test! If it's still not filling the height, we may need to give even more width to the image column (like 70%).
+
+I'm using a much wider picture now - It is no longer shown beside the left text column, but underneath- Try to fix that
+10:12 PM
+
+The grid is breaking to a single column because the image is too wide. Let me fix this by ensuring the grid stays in two columns and handles the wider image:
+decor/app/views/home/index.html.erb
+Code ∙ Version 21 
+
+I've updated decor/app/views/home/index.html.erb to version 2.6 with these critical fixes:
+
+Key changes to keep columns side-by-side:
+
+    Changed grid to explicit percentages: lg:grid-cols-[35%_65%]
+        Forces the grid to stay in two columns on large screens
+        Left: 35%, Right: 65% to accommodate very wide images
+    Added min-w-0 to both columns - This is crucial! It allows columns to shrink below their content's natural width, preventing grid breakage
+    Reduced gap from 12 to 8 - Gives more width to the columns
+    Added max-w-full to both the border container and image - Ensures the image scales down to fit the column width if needed
+    Moved styling: Now uses class="block max-w-full h-auto" with style="max-height: calc(100vh - 160px);"
+
+How it works now:
+
+    The image will scale to fit EITHER the height constraint (160px less than viewport) OR the width constraint (65% of screen width), whichever is smaller
+    Aspect ratio is always preserved
+    Grid stays side-by-side
+
+Save and test! The columns should now stay beside each other even with your wider image.
+
+
+
+
+
+

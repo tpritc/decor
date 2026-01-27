@@ -1,3 +1,8 @@
+<%# decor/app/views/layouts/application.html.erb - v1.1 %>
+<%# Main application layout template %>
+<%# Defines the overall page structure: head, navigation, main content, footer %>
+<%# Footer stays at bottom, main content uses flex-1 to fill available space %>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -8,23 +13,32 @@
     <meta name="mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= yield :head %>
-
+    
+    <%# Favicon and app icons %>
     <link rel="icon" href="/icon.png" type="image/png">
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
-
+    
+    <%# Stylesheet and JavaScript imports %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
-
+  
+  <%# Body uses flexbox column layout with minimum full screen height %>
+  <%# flex-1 on main makes it expand to push footer to bottom %>
   <body class="flex flex-col min-h-screen bg-white text-stone-900">
+    <%# Navigation bar at top %>
     <%= render "common/navigation" %>
+    
+    <%# Flash messages for notifications %>
     <%= render "common/flashes" %>
-
-    <main class="flex-1 p-4"><%= yield %></main>
-
+    
+    <%# Main content area - flex-1 makes it expand to fill space, pushing footer to bottom %>
+    <%# Minimal padding (p-1) to maximize space for content %>
+    <main class="flex-1 p-1"><%= yield %></main>
+    
+    <%# Footer at bottom - will be pushed to bottom by main's flex-1 %>
     <%= render "common/footer" %>
   </body>
 </html>
